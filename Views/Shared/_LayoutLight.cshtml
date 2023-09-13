@@ -1,0 +1,352 @@
+﻿@using Ivanti_FW.Helper;
+@
+@{
+    var currentLang = LocalizationsManager.GetCurrentLanguage();
+    var dirLang = currentLang == "ar" ? "rtl" : "ltr";
+    DgUiDto ui =  DigitalGateWebRequestUrlHelper.GetUIAsync<DgUiDto>().Result;
+}
+<!doctype html>
+<html lang="@currentLang" dir="@dirLang">
+<head>
+
+    @Html.Raw(ui.Head)
+    <link href="https://cdn.saudisystems.net/V4/assets/plugins/growl-notification/light-theme.min.css" rel="stylesheet">
+    <style>
+        .search-sec {
+            padding-bottom: 20px;
+        }
+
+        .search-slt {
+            display: block;
+            width: 100%;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            color: #55595c;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            height: calc(3rem + 2px) !important;
+            border-radius: 0;
+        }
+
+        .wrn-btn {
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: capitalize;
+            border-radius: 0;
+        }
+
+    </style>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"></link>
+</head>
+<body class="app horizontal @dirLang">
+    <!-- GLOBAL-LOADER -->
+    <div id="global-loader">
+        <img src="//cdn.saudisystems.net/V4/assets/images/loader.svg" class="loader-img" alt="Loader">
+    </div>
+    <!-- /GLOBAL-LOADER -->
+    <!-- PAGE -->
+    <div class="page">
+        <div class="page-main">
+            <!-- app-Header -->
+            @Html.Raw(ui.Header)
+            <!-- /app-Header -->
+            <!--app-content open-->
+            <div class="main-content hor-content container-xxl">
+                <div class="side-app">
+                    <!-- CONTAINER -->
+                    <div class="main-container">
+                        <div class="row ">
+                            @Html.Raw(ui.Sidebar)
+                            <div class="col-lg h-100">
+                                <div class="side-app">
+                                    <div class="main-container">
+                                        <div class="site-content bg-white px-4 px-md-6 py-4">
+
+                                            <!-- PAGE-HEADER -->
+                                            @RenderSection("toolbar", false)
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="page-content">
+                                                        <!-- PAGE-HEADER END -->
+                                                        @RenderBody()
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        @Html.Partial("_ModelDiv")
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- CONTAINER CLOSED -->
+                </div>
+            </div>
+            <!--app-content closed-->
+        </div>
+        <!-- FOOTER -->
+        @Html.Raw(ui.Footer)
+    </div>
+
+
+
+
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- SIDEBAR JS -->
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/sidebar/sidebar.min.js"></script>
+
+    <!-- Sticky js -->
+    <script src="//cdn.saudisystems.net/V4/assets/js/sticky.js"></script>
+    <!-- Greedy Navigation JS -->
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/greedy-nav/greedy-nav.min.js"></script>
+
+    <!--Video Popup CSS-->
+    <link href="//cdn.saudisystems.net/V4/assets/plugins/videopopup/video.popup.css" rel="stylesheet" />
+
+    <!-- INTERNAL SELECT2 JS -->
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/select2/select2.full.min.js"></script>
+    <script src="//cdn.saudisystems.net/V4/assets/js/select2.js"></script>
+
+
+    <!-- SWEET-ALERT JS -->
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/sweetalert2/dist/sweetalert2.lang.js"></script>
+
+    <!-- MULTI SELECT JS-->
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/multipleselect/multiple-select.min.js"></script>
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/multipleselect/multiple-select-ar-SA.js"></script>
+
+    <!-- isotope Filter JS -->
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/isotope/isotope.pkgd.js"></script>
+
+    <!-- INTERNAl Jquery.steps js -->
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/jquery-steps/jquery.steps.min.js"></script>
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/parsleyjs/parsley.min.js"></script>
+
+    <!-- Charts Js-->
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/knob/knob.min.js"></script>
+
+
+    <!-- INTERNAL Notifications js -->
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/growl-notification/growl-notification.min.js"></script>
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/validation/smoke-v3.1.1/js/smoke.js"></script>
+
+    <!-- DateRangePicker -->
+    <script src="//cdn.saudisystems.net/V4//assets/plugins/datepicker/daterangepicker.js"></script>
+
+    <!-- INTERNAL Video Popup-->
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/videopopup/video.popup.js"></script>
+
+    <!-- Avatar fileupload JS -->
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/fileuploads/js/fileupload.js"></script>
+
+
+    <!-- CUSTOM JS -->
+    <script src="//cdn.saudisystems.net/V4/assets/js/custom.js"></script>
+
+    <!-- INTERNAL File-Uploads Js-->
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/fancyuploder/jquery.ui.widget.js"></script>
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/fancyuploder/jquery.fileupload.js"></script>
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/fancyuploder/jquery.iframe-transport.js"></script>
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/fancyuploder/jquery.fancy-fileupload.js"></script>
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/fancyuploder/lang/ar.js"></script>
+
+
+    <!-- Particles Animation JS -->
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/particles/particles.min.js"></script>
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/particles/particles.init.js"></script>
+
+    <!-- SimpleBar JS-->
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/simplebar/simplebar.min.js"></script>
+
+    <!-- Datepicker -->
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/datepicker/bootstrap-hijri-datetimepicker.min.js">
+    </script>
+
+    <!-- SWEET-ALERT JS -->
+    <script src="//cdn.saudisystems.net/V4/assets/plugins/sweet-alert/sweetalert.min.js"></script>
+    <script src="~/Assets/AdminLTE/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Assets/AdminLTE/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Assets/AdminLTE/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script src="~/Assets/Adminlte/Scripts/GS/GS.upload.js"></script>
+    <script src="~/Assets/Adminlte/Scripts/GS/DeleteFileAttach.js"></script>
+
+
+    <script src="~/Assets/AdminLTE/Scripts/EMM/EMMFileUpload.js"></script>
+    <script src="~/Assets/Adminlte/Scripts/EMM/EMMPagging.js"></script>
+
+    <!-- dg JS -->
+    <script src="//cdn.saudisystems.net/V4/assets/js/dg.js"></script>
+    <script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    @Html.Raw(ui.Scripts)
+
+    <script>
+       
+        var dir = $('html').attr('dir');
+        if(dir == 'rtl'){
+            $('#example1')
+                .DataTable({
+                    "language":
+                    {
+                        "sProcessing": "جارٍ التحميل...",
+                        "sLengthMenu": "أظهر _MENU_ مدخلات",
+                        "sZeroRecords": "لم يعثر على أية سجلات",
+                        "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                        "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                        "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                        "sInfoPostFix": "",
+                        "sSearch": "ابحث:",
+                        "sUrl": "",
+                        "oPaginate": {
+                            "sFirst": "الأول",
+                            "sPrevious": "السابق",
+                            "sNext": "التالي",
+                            "sLast": "الأخير"
+                        }
+                    }
+                });
+        }
+        else{
+            $('#example1').DataTable();
+        }
+       
+        $.ajax({
+            type: 'GET',
+            url: "@Url.Action("SideBar", "Home")",
+            success: function (r) {
+                $('.list-group-transparent').append(r);
+
+            }
+        });
+        languageHelper.setup(function (lang) {
+            localStorage.setItem('lang', lang);
+            alert(localStorage.getItem('lang'));
+            console.log('localStorage:lang=', localStorage.getItem('lang'));
+        });
+        $('#changLang').on('click',function(e){
+            e.preventDefault();
+            $.ajax({
+                type: 'GET',
+                url: "@Url.Action("SetCulture", "Home")",
+                success: function (r) {
+                    location.reload();
+                }
+            });
+        });
+       
+        function NotifyMsg(Title, Msg, Status) {
+            var type;
+            if (Status == "1") {
+                type = 'info';
+            }
+            else if (Status == "2") {
+                type = 'error';
+            }
+            GrowlNotification.notify({
+                title: Title,
+                description: Msg,
+                image: {
+                    visible: true,
+                },
+                type: type,
+                closeTimeout: 3000
+            });
+        }
+
+
+        function showModal(Title, parameter, r, size) {
+            var sizeid = '#largemodal';
+            if (size == 'sm') {
+                sizeid = '#smallmodal';
+            }
+            else if (size == 'lg') {
+                sizeid = '#largemodal';
+            }
+            else if (size == 'xs') {
+                sizeid = '#extralargemodal'
+            }
+            else if (size == 'fs') {
+                sizeid = '#fullscreenmodal'
+            }
+            else if (size == 'scroll') {
+                sizeid = '#scrollingmodal'
+            }
+            let modal = bootstrap.Modal.getOrCreateInstance($(sizeid))
+            $(sizeid).find('.modal-title').html(Title);
+            $(sizeid).find('.modal-body').html(r);
+            modal.show();
+        }
+
+        function ConfirmMessageDelete(element, Title, Msg, btnName, url, PrimaryID) {
+
+            let modal = bootstrap.Modal.getOrCreateInstance($('#ConfirmModal'))
+            $('#ConfirmModal').find('.modal-title').html(Title);
+            $('#ConfirmModal').find('.modal-body').html(Msg);
+            modal.show();
+
+            $('.btn-confirm-yes').on('click', function () {
+                DeleteFnc(element, url, PrimaryID);
+            });
+
+        }
+
+        function DeleteFnc(element, url, PrimaryID) {
+            var reqid = $(element).closest('tr').attr("reqid");
+            var arrayParam = {};
+            arrayParam[PrimaryID] = reqid;
+            $.ajax({
+                url: url,
+                data: arrayParam,
+                type: 'POST',
+                success: function (msg) {
+                    NotifyMsg(msg.statusTitle, msg.statusMessage, msg.status);
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1000)
+                }
+            });
+        }
+
+        $.fn.GSSubmit = function (Form, ActionUrl) {
+            // e.preventDefault();
+            $.ajax({
+                type: Form.attr('method'),
+                url: ActionUrl,
+                data: Form.serialize(),
+                beforeSend: function () {
+                    $("#spinner").show();
+                },
+                success: function (data) {
+                    $("#spinner").hide();
+                    w = window.open();
+
+                    w.document.write(data);
+                    w.document.close();
+                },
+                error: function (data) {
+                    $("#spinner").hide();
+                    alert('An error occurred.');
+                    console.log(data);
+                }
+            });
+        };
+        $('.GSSubmit').on('click', function () {
+            var Form_id = "#" + $(this).closest("form").attr('id');
+            var ActionUrl = $(this).attr('formaction');
+
+            $(Form_id).GSSubmit($(Form_id), ActionUrl);
+        });
+    </script>
+
+
+
+</body>
+</html>

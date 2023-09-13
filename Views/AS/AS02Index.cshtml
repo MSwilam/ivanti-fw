@@ -1,0 +1,59 @@
+@model Ivanti_FW.Models.AS02SearchModel
+
+
+@{
+	 var  SupportTypeCollection = EA.GetSupportType(); 
+	}
+	
+
+<div class="search-form" id="div-search-emp">
+
+    <form url="@Url.Action("AS02ReqIndex")" id="AS02SubmitIndex">
+        <div class="row search-sec">
+  	<div class="col-lg-12">
+ 		<div class="row">
+		 <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+		 @Html.DropDownListFor((m) => m.AS02.SupportTypeId, new SelectList(SupportTypeCollection, "Key", "Value"), EA.GetMessage("All"), new { @class = "form-control input-sm" })
+	 </div>
+		
+  		<div class="col-lg-3 col-md-3 col-sm-12 p-0">
+
+                        <button type="button" class="btn btn-primary wrn-btn btn-serach-submit"> <i class="fa fa-search" aria-hidden="true"></i> @Html.GSText("Search")</button>
+                                <button type="button" formaction="@Url.Action("PrintAS02ReqIndex", "AS")" class="btn btn-default wrn-btn  GSSubmit"><i class="fa fa-print no-print" aria-hidden="true"></i>@Html.GSText("Print")</button>
+                            </div>
+				</div>
+                    </div>
+                </div>
+               @Html.HiddenFor((m) => m.FieldType)
+                    @Html.HiddenFor((m) => m.PageIndex)
+                    @Html.HiddenFor((m) => m.PageSize)
+                    @Html.HiddenFor((m) => m.SortField)
+                    @Html.HiddenFor((m) => m.SortDirection)
+		    
+    </form>
+
+    <div class="search-results" id="div-search-results">
+
+    </div>
+
+
+</div>
+
+<script type="text/javascript">
+    SubmitIndex($('#AS02SubmitIndex'));
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

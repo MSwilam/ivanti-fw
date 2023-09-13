@@ -1,0 +1,51 @@
+@model Ivanti_FW.Models.ServiceModel
+
+<style>
+    .project-info-box {
+        margin: 15px 0;
+        background-color: #fff;
+        padding: 30px 40px;
+        border-radius: 5px;
+    }
+
+        .project-info-box p {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #d5dadb;
+        }
+
+            .project-info-box p:last-child {
+                margin-bottom: 0;
+                padding-bottom: 0;
+                border-bottom: none;
+            }
+
+</style>
+
+
+<div class="container">
+    <div class="row">
+
+
+        <div class="project-info-box">
+            <p><b>@Html.GSText("SR#") :</b> @Model.ServiceReq.ServiceReqNumber</p>
+            <p><b>@Html.GSText("servicename") :</b> @Model.ServiceReq.Service</p>
+            <p><b>@Html.GSText("ServiceType") :</b> @Model.ServiceReq.Subject</p>
+            <p><b>@Html.GSText("ServiceStatus") :</b> @Model.ServiceReq.Status</p>
+            <p><b>@Html.GSText("CreatedBy") :</b> @Model.ServiceReq.CreatedBy</p>
+            <p><b>@Html.GSText("CreatedDate") :</b>@Model.ServiceReq.CreatedDateTime.ToShortDateString()</p>
+            <p><b>@Html.GSText("ENTITYNAME") :</b> @Model.ServiceReq.assignedentity</p>
+            <p><b>@Html.GSText("EMAIL") :</b> @Model.ServiceReq.Email</p>
+            <p><b>@Html.GSText("SOURCE") :</b> @Model.ServiceReq.Source</p>
+            <p><b>@Html.GSText("TISDESCRIPTION") :</b> @Model.ServiceReq.FYADescription</p>
+            <p class="mb-0"><b>@Html.GSText("NOTES") :</b> @Model.ServiceReq.Note</p>
+        </div><!-- / project-info-box -->
+
+
+
+    </div>
+</div>
+
+@Html.Partial("FileUploadDetail", Model.AttachResponse)
+
+

@@ -1,0 +1,74 @@
+﻿@model Ivanti.Service.BusinessEntites.PostManParamHeader
+
+@{
+    ViewBag.Title = EA.GetMessage("POST_MAN");
+    //Layout = "~/Views/Shared/_LayoutWork.cshtml";
+}
+
+
+<style>
+    .tooltip-master {
+        display: none;
+    }
+</style>
+
+@section toolbar{
+
+    <div class="page-header mb-0">
+        <div class="col-md-12">
+            <div class="row align-items-end">
+                <div class="col-xl-9">
+                    <div class="d-flex page-header-element align-items-center">
+                        <img src="//cdn.saudisystems.net/V4/assets/images/svgs/service_line/Indv/sims.svg" width="64" height="64" class="me-2">
+                        <div>
+                            <a href="/" class="back_btn pb-1 align-items-end mt-0 fs-12">
+                                <i class="mutasil-icon mutasil-icon-40 fa-lg"></i>
+                                @Html.GSText("BACK_TO_Main")
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<div class="search-form" id="div-search-emp">
+
+    <form url="@Url.Action("PostManResult","Home")" id="AS01SubmitIndex">
+        <div class="row search-sec">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        @Html.DropDownListFor(m => m.ActionId, new SelectList(EA.GetHeaderType(), "Key", "Value", 1), null, htmlAttributes: new { @class = "form-control", @id = "PageSizeid" })
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 p-0">
+                        @Html.EditorFor((m) => m.Link, new { htmlAttributes = new { @class = "form-control input-sm", @placeholder = Html.GSText("LINK") } })
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        <button type="button" class="btn btn-primary wrn-btn btn-serach-submit"> <i class="fa fa-search" aria-hidden="true"></i> @Html.GSText("Send")</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="search-results" id="div-search-results">
+        </div>
+    </form>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.div-upload-file').initUpload({});
+
+    });
+
+    function fnCompleted(msg) {
+        NotifyMsg(msg.responseJSON.statusTitle, msg.responseJSON.statusMessage, msg.responseJSON.status);
+        setTimeout(function () {
+            window.location.href = "/AS/AS01Dashboard";
+        }, 1000);
+    };
+</script>

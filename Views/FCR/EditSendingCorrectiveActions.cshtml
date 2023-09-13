@@ -1,0 +1,79 @@
+@model Ivanti_FW.Models.SendingCorrectiveActionsModelReq
+
+
+
+<style>
+    .tooltip-master {
+        display: none;
+    }
+</style>
+
+
+@{
+	 var  YesNoAnswerCollection = EA.GetYesNoAnswer(); 
+	}
+	
+
+<form asp-action="EditSendingCorrectiveActions" asp-controller="FCR" method="POST" data-ajax="true" data-ajax-complete="fnCompleted" class="CreatePage" id="SendingCorrectiveActionsFrmID">
+
+    @Html.AntiForgeryToken()
+
+
+                                <div class="box-body">
+				    <div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("CorrectiveActions")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.SendingCorrectiveActions.CorrectiveActions, "", new { @class = "text-danger" })
+			@Html.EditorFor(model => model.SendingCorrectiveActions.CorrectiveActions, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("CorrectiveActions"), @maxlength = 200 } })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("DueDate")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.SendingCorrectiveActions.DueDate, "", new { @class = "text-danger" })
+			@Html.EditorFor(model => model.SendingCorrectiveActions.DueDate, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("DueDate") } })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("YesNoAnswer")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.SendingCorrectiveActions.Complete, "", new { @class = "text-danger" })
+			@Html.DropDownListFor((m) => m.SendingCorrectiveActions.Complete, new SelectList(YesNoAnswerCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("YesNoAnswer"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("Notes")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.SendingCorrectiveActions.Notes, "", new { @class = "text-danger" })
+			@Html.TextAreaFor(model => model.SendingCorrectiveActions.Notes,  new { @class = "form-control mb-4", @placeholder = @Html.GSText("Notes"), @maxlength = 4000 ,@rows = 4 } )
+		</div>
+	</div>
+	
+				    
+                                </div>
+
+                       
+
+		 @Html.HiddenFor(m => m.SendingCorrectiveActions.ID)
+            <div class="modal-footer border-0">
+        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">@Html.GSText("Close")</button>
+        <button type="submit" class="btn btn-primary">@Html.GSText("Save")</button>
+    </div>
+</form>
+
+
+
+    <script type="text/javascript">
+	$(document).ready(function () {
+	
+	
+  	});
+
+       function fnCompleted(msg) {
+         NotifyMsg(msg.responseJSON.statusTitle, msg.responseJSON.statusMessage, msg.responseJSON.status);
+        setTimeout(function () {
+            window.location.href = "/FCR/SendingCorrectiveActionsDashboard";
+        }, 1000);
+    };
+
+</script>

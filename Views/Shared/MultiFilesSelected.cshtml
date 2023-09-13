@@ -1,0 +1,65 @@
+﻿@model Ivanti.Service.BusinessEntites.GetFilesFPModel
+
+<div class="card card-bordered  card-white file-attachment-section">
+    <div class="card-head b-b"><header class="title"> @Html.GSText("FilesAttached")</header></div>
+    <div class="card-body">
+        @if (Model.FilesCollection != null)
+        {
+            <table class="table  table-condensed  no-shadow table-white m-0">
+                <thead>
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="employeeIDsToDelete" class="checkListAllFP" />
+                        </td>
+                        <td colspan="4" class="text-right">
+                            <button type="button" class="btn btn-danger btnDeleteAllFP btn-flat " title="@Html.GSText("DELETE_ALL_SELECTED")">@Html.GSText("DELETE_ALL_SELECTED") <i class="glyphicon glyphicon-trash"></i></button>
+                        </td>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model.FilesCollection)
+                    {
+                        <tr imageid="@item.ID">
+                            <td>
+                                <input type="checkbox" name="employeeIDsToDelete" class="checkListFP" value=@item.ID />
+                            </td>
+                            <td class="file-type width-1">
+                                <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                            </td>
+                            <td class="ShowFileCls" style="cursor:pointer;">
+                                @*<input class="ExistFiles" value="@item.EnglishName" style="display:none" />*@
+                                @item.EnglishName
+                            </td>
+                            <td class="width-2 text-right"><a href="@Url.Action("DownLoadAttachment", new { imageID = item.ID })" class="btn btn-flat"><i class="mdi mdi-file-download f-16"></i>@Html.GSText("download")</a></td>
+                            <td class="width-2 text-right  FileDeleteClsFP" ImageID="@item.ID"><a href="#" class="btn btn-flat"><i class="fa fa-trash" id="file-delete"></i></a></td>
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        }
+        else
+        {
+            @Html.GSNoRecord()
+        }
+    </div>
+    <div class="form-group File-upload-inline">
+        <div class="text-divider col-sm-12"><span>@Model.FilesHeaderName</span></div>
+        <div class=" file-attachment-section">
+            <div class="col-sm-12 div-upload-file">
+                @{ Html.RenderPartial("UploadFileInline", new GSFunction.Models.UploadFileModel { FileTypes = ".doc,.pdf,.docx,.xls,.xlsx,.jpeg,.jpg,.png,.gif,.tif" });}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    DeleteFileAttach();
+    GSShowFile();
+</script>

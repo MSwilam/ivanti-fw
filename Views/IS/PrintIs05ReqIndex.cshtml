@@ -1,0 +1,309 @@
+@model Ivanti_FW.Models.Is05Model
+
+@{
+    Layout = "~/Views/Shared/_PrintLayout.cshtml";
+}
+
+<style>
+    @@page {
+        size: auto;
+        margin: 30px;
+    }
+
+    tr {
+        display: block;
+    }
+
+    @@media print {
+        html {
+            height: 100%;
+        }
+
+        .foootertr {
+            page-break-after: always;
+            page-break-inside: avoid;
+        }
+
+        .FooterPage {
+            page-break-after: always;
+            page-break-inside: avoid;
+        }
+
+        .no-print, .no-print * {
+            display: none !important;
+        }
+    }
+
+    .foootertr {
+        page-break-after: always;
+        page-break-inside: avoid;
+    }
+
+
+    .wrapper-table > table {
+        width: 100%;
+    }
+
+    .HeaderDiv {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .trFullWidth {
+        width: 842px;
+    }
+
+   .th1 { 
+width: 7% 
+} 
+	.th2 { 
+width: 7% 
+} 
+	.th3 { 
+width: 7% 
+} 
+	.th4 { 
+width: 7% 
+} 
+	.th5 { 
+width: 7% 
+} 
+	.th6 { 
+width: 7% 
+} 
+	.th7 { 
+width: 7% 
+} 
+	.th8 { 
+width: 7% 
+} 
+	.th9 { 
+width: 7% 
+} 
+	.th10 { 
+width: 7% 
+} 
+	.th11 { 
+width: 7% 
+} 
+	.th12 { 
+width: 7% 
+} 
+	.th13 { 
+width: 7% 
+} 
+	.th14 { 
+width: 7% 
+} 
+	
+
+ 
+
+ 
+
+
+
+
+
+    .divbox {
+        width: 32%;
+        display: inline-block;
+        margin: 0px 0;
+        border-radius: 5px;
+    }
+
+        .divbox.headerLeft {
+            text-align: right;
+        }
+
+        .divbox.headerRight {
+            text-align: left;
+        }
+
+        .divbox img {
+            display: block;
+            margin: auto;
+        }
+
+        .divbox.headerMiddel {
+            text-align: center;
+        }
+
+    #divx {
+        width: 842px;
+        margin: 30px;
+        font-family: 'Janna LT Regular';
+    }
+
+    .MainTable {
+        border-collapse: collapse;
+        width: 842px;
+        table-layout: fixed;
+    }
+
+    .InsideTable {
+        width: 842px;
+    }
+
+        .InsideTable td {
+            border: none;
+        }
+
+        .InsideTable th {
+            border: none;
+        }
+
+    .MainTable td {
+        border: 1px gray solid;
+        padding: 2px;
+        font-size: 14px;
+        height: auto;
+    }
+
+    .MainTable th {
+        border: 1px black solid;
+        padding: 2px;
+        font-size: 16px;
+        height: auto;
+    }
+</style>
+
+
+<div id="docx">
+    <div id="divx">
+        <div class="HeaderDiv">
+            <div class="divbox headerRight">
+                <p>
+                  Ivanti
+                </p>
+                <p> Details</p>
+                <p>  Saudi Arabia</p>
+            </div>
+            <div class="divbox">
+                 <img src="//cdn.saudisystems.net/V4/assets/images/brand/gate_logo_indv.svg" class="header-brand-img light-logo1" alt="logo">
+            </div>
+            <div class="divbox headerLeft">
+                <p> </p>
+                <p> </p>
+            </div>
+        </div>
+        <div class="wrapper-table">
+            <table class="MainTable" style="margin:0px;padding:0px;">
+
+                <thead>
+                    <tr class="theadResp">
+
+
+
+                        <th class="DetailsDialog th1 " >@Html.GSText("NotifyNCA")</th>
+	<th class="DetailsDialog th2 " >@Html.GSText("NotifyDMO")</th>
+	<th class="DetailsDialog th3 " >@Html.GSText("NotifyTelecomCrisis")</th>
+	<th class="DetailsDialog th4 " style="display:none;">@Html.GSText("SeverityLevel")</th>
+	<th class="DetailsDialog th5 " style="display:none;">@Html.GSText("IncidentResolved")</th>
+	<th class="DetailsDialog th6 " style="display:none;">@Html.GSText("InputToMedia")</th>
+	<th class="DetailsDialog th7 " style="display:none;">@Html.GSText("TechnicalAssistanceNedded")</th>
+	<th class="DetailsDialog th8 " style="display:none;">@Html.GSText("IRType")</th>
+	<th class="DetailsDialog th9 " style="display:none;">@Html.GSText("ADVICE")</th>
+	<th class="DetailsDialog th10 " style="display:none;">@Html.GSText("THIRDPARTYNOMINATION")</th>
+	<th class="DetailsDialog th11 " style="display:none;">@Html.GSText("ANALYSTNOTE")</th>
+	<th class="DetailsDialog th12 " style="display:none;">@Html.GSText("TEAMLEADERNOTE")</th>
+	<th class="DetailsDialog th13 " style="display:none;">@Html.GSText("ClosureReason")</th>
+	<th class="DetailsDialog th14 " style="display:none;">@Html.GSText("CLOSINGNOTE")</th>
+	
+
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model.Is05List)
+                    {
+                    <tr class="bodytr">
+                       <td class="DetailsDialog th1" >@EA.GetYesNoAnswer(@item.NotifyNCA) </td>
+	<td class="DetailsDialog th2" >@EA.GetYesNoAnswer(@item.NotifyDMO) </td>
+	<td class="DetailsDialog th3" >@EA.GetYesNoAnswer(@item.NotifyTelecomCrisis) </td>
+	<td class="DetailsDialog th4" style="display:none;">@EA.GetSeverityLevel(@item.SeverityLevelId) </td>
+	<td class="DetailsDialog th5" style="display:none;">@EA.GetYesNoAnswer(@item.IncidentResolved) </td>
+	<td class="DetailsDialog th6" style="display:none;">@EA.GetYesNoAnswer(@item.InputToMedia) </td>
+	<td class="DetailsDialog th7" style="display:none;">@EA.GetYesNoAnswer(@item.TechnicalAssistanceNedded) </td>
+	<td class="DetailsDialog th8" style="display:none;">@EA.GetIRType(@item.IRTypeId) </td>
+	<td class="DetailsDialog th9 " style="display:none;" >@item.Advice</td>
+	<td class="DetailsDialog th10 " style="display:none;" >@item.ThirdPartyNomination</td>
+	<td class="DetailsDialog th11 " style="display:none;" >@item.AnalystNote</td>
+	<td class="DetailsDialog th12 " style="display:none;" >@item.TeamLeaderNote</td>
+	<td class="DetailsDialog th13" style="display:none;">@EA.GetClosureReason(@item.ClosureReasonId) </td>
+	<td class="DetailsDialog th14 " style="display:none;" >@item.ClosingNote</td>
+	
+                    </tr>
+                    }
+
+
+
+                    <tr class="FooterPage">
+                        <th class="FinalPage trFullWidth" colspan="TOTAL_COUNT">
+                            <div class="divbox headerRight">
+                                <p>PrintedBy :test</p>
+                                <p></p>
+                            </div>
+                            <div class="divbox">
+                                <p>page: <span class='totalPage'></span> / <span class='totalPage'></span> <p>
+                                <p></p>
+                            </div>
+                            <div class="divbox headerLeft">
+                                <p>Printed Date :@DateTime.Now.ToShortDateString()</p>
+                                <p></p>
+                            </div>
+                        </th>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+
+ 
+</div>
+
+
+
+<script type="text/javascript">
+    $(window).on('load', function () {
+        window.print();
+       // window.close();
+    });
+     var printBy = "test";
+         var printDate = "@DateTime.Now.ToShortDateString()";
+         portieraiateCalc(TOTAL_COUNT, printBy, printDate);
+
+
+	document.onkeydown = function (e) {
+
+        if (event.keyCode == 123) {
+            return false;
+        }
+
+
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+            return false;
+        }
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+            return false;
+        }
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+            return false;
+        }
+        if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+            return false;
+        }
+    }
+
+
+</script>
+
+

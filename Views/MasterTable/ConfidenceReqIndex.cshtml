@@ -1,0 +1,136 @@
+@model Ivanti_FW.Models.ConfidenceModel
+
+@{
+    string DetailsText = @EA.GetMessage("Details");
+    string EditText = @EA.GetMessage("Edit");
+    string DeActivatedText = @EA.GetMessage("DeActivated");
+    string ActiveText = @EA.GetMessage("Active");
+}
+
+
+
+
+<div class="row">
+
+                @{
+                    Html.RenderPartial("PagingModelPartial");
+                }
+                @if (@Model.ConfidenceList != null)
+                {
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead class="thead-dark ReqIndex">
+                            <tr>
+                                <th width="5%">
+                                    <input type="checkbox" id="CheckAll" />
+                                </th>
+
+
+                               <th class="sort"  SortField="ARABICNAME" SortDirection="Ascending">@Html.GSText("ARABICNAME")</th>
+	<th class="sort"  SortField="ENGLISHNAME" SortDirection="Ascending">@Html.GSText("ENGLISHNAME")</th>
+	
+
+
+                                <th class="text-center">
+                                    @EditText
+                                </th>
+                                <th class="text-center">
+                                    @DeActivatedText
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+     			@foreach (var item in Model.ConfidenceList)
+                            {
+                            <tr reqid="@item.Id" class="RawClass" style="cursor: pointer">
+                                    <td id="select">
+                                        <input type="checkbox" name="employeeIdsToDelete" id="AssetsTypeIdsToDelete" value=@item.Id />
+                                    </td>
+
+
+                                    <td class="DetailsDialog th1 "  >@item.ArabicName</td>
+	<td class="DetailsDialog th2 "  >@Html.GSCamalCase(@item.EnglishName)</td>
+	
+
+                                    <td class="text-center">
+                                        <a class="btn btn-primary btn-sm EditClass"  data-to data-toggle="tooltip" data-placement="top" data-original-title="@EditText" title="@EditText"><i class="glyphicon glyphicon-edit"></i></a>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a class="btn btn-danger btn-sm Deleteclss" ID="@item.Id" data-toggle="tooltip" data-placement="top" data-original-title="@DeActivatedText" title="@DeActivatedText"><i class="glyphicon glyphicon-trash"></i></a>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                }
+                else
+                {
+                    @Html.GSNoRecord()
+                }
+</div><!-- /.row -->
+
+
+
+
+
+
+<script>
+    $(function () {
+	//TableSerach('@Url.Action("GetConfidenceSearchTxt","Confidence")", "ConfidenceNameAC"); 
+	
+    });
+
+     $('.EditClass').on('click', function () {
+
+        var reqid = $(this).closest('tr').attr("reqid");
+        ConfidenceEdit(reqid);
+    });
+
+     $('.DetailsDialog').on('click', function () {
+
+        var reqid = $(this).closest('tr').attr("reqid");
+        ConfidenceDetails(reqid);
+    });
+
+    function ConfidenceEdit(reqid) {
+        $.ajax({
+            type: 'GET',
+            url: "@Url.Action("EditConfidence", "MasterTable")",
+            data: {
+                Id: reqid
+            },
+
+            success: function (r) {
+                showModal("@Html.GSText("UPDATE Confidence")",null,r,'lg');
+
+            }
+        });
+    }
+
+ function ConfidenceDetails(reqid) {
+        $.ajax({
+            type: 'GET',
+            url: "@Url.Action("DetailsConfidence", "MasterTable")",
+            data: {
+                Id: reqid
+            },
+
+            success: function (r) {
+                showModal("@Html.GSText("Details")",null,r,'lg');
+            }
+        });
+    }
+
+    $('.Deleteclss').on('click', function () {
+
+        ConfirmMessageDelete(this, "Delete Confirm", "Are You Sure ?", "Delete", '@Url.Action("DeleteConfidence", "MasterTable")','Id')
+    });
+
+
+
+</script>
+

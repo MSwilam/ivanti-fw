@@ -1,0 +1,100 @@
+@model Ivanti_FW.Models.SeverityLevelModelReq
+
+@{
+    ViewBag.Title = EA.GetMessage("CREATE");
+    //Layout = "~/Views/Shared/_LayoutWork.cshtml";
+}
+
+
+<style>
+    .tooltip-master {
+        display: none;
+    }
+</style>
+
+@section toolbar{
+
+    <div class="page-header mb-0">
+        <div class="col-md-12">
+            <div class="row align-items-end">
+                <div class="col-xl-9">
+                    <div class="d-flex page-header-element align-items-center">
+                        <img src="//cdn.saudisystems.net/V4/assets/images/svgs/service_line/Indv/sims.svg" width="64" height="64" class="me-2">
+                        <div>
+                            <a href="/MasterTable/SeverityLeveldashboard" class="back_btn pb-1 align-items-end mt-0 fs-12">
+                                <i class="mutasil-icon mutasil-icon-40 fa-lg"></i>
+                                @Html.GSText("BACK_TO_SeverityLevel")
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<form asp-action="CreateSeverityLevel" asp-controller="MasterTable" method="POST" data-ajax="true" data-ajax-complete="fnCompleted" class="CreatePage" id="SeverityLevelFrmID">
+
+    @Html.AntiForgeryToken()
+
+
+                            <!-- form start -->
+                            <section class="form-horizontal center">
+                                <div class="box-body">
+                                    <div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("ArabicName")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.SeverityLevel.ArabicName, "", new { @class = "text-danger" })
+			<div class="d-flex">
+		@Html.EditorFor(model => model.SeverityLevel.ArabicName, new { htmlAttributes = new { @class = "form-control ArabicCheckList", @placeholder = @Html.GSText("ARABICNAME"), @maxlength = 200 } })
+		<button type="button" class="btn btn-icon-toggle btn-warning tooltip-master" data-tooltip-content="#tooltip_ArabicCheck">
+		<i class="mdi mdi-info-outline"></i>
+		</button>
+	</div>
+	</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("EnglishName")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.SeverityLevel.EnglishName, "", new { @class = "text-danger" })
+			<div class="d-flex">
+		@Html.EditorFor(model => model.SeverityLevel.EnglishName, new { htmlAttributes = new { @class = "form-control EnglishCheckList", @placeholder = @Html.GSText("EnglishName"), @maxlength = 200 } })
+		<button type="button" class="btn btn-icon-toggle btn-warning tooltip-master" data-tooltip-content="#tooltip_EnglishCheck">
+		<i class="mdi mdi-info-outline"></i>
+		</button>
+	</div>
+	</div>
+	</div>
+	
+				    
+                                </div>
+
+                            </section>
+                      
+<div class="modal-footer border-0 float-start">
+         <button class="btn btn-primary btn-submit">@Html.GSText("ADD_SeverityLevel")</button>
+        <a href="/MasterTable/SeverityLeveldashboard" class="btn btn-outline-primary">@Html.GSText("Cancel")</a>
+       
+    </div>
+
+   
+       
+</form>
+
+
+
+    <script type="text/javascript">
+	$(document).ready(function () {
+	
+	
+  	});
+
+     function fnCompleted(msg) {
+        NotifyMsg(msg.responseJSON.statusTitle, msg.responseJSON.statusMessage, msg.responseJSON.status);
+        setTimeout(function () {
+            window.location.href = "/MasterTable/SeverityLevelDashboard";
+        }, 1000);
+    };
+</script>

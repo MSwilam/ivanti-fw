@@ -1,0 +1,119 @@
+@model Ivanti_FW.Models.IS01SearchModel
+
+
+@{
+    var IncidentTypeCollection = EA.GetIncidentType();
+    var YesNoAnswerCollection = EA.GetYesNoAnswer();
+    var ServiceProviderClassificationCollection = EA.GetServiceProviderClassification();
+    var ImpactedServiceCollection = EA.GetImpactedService();
+    var SophisticationAttackCollection = EA.GetSophisticationAttack();
+    var ImpactTypeSeverityCollection = EA.GetImpactTypeSeverity();
+    var ImpactAssetCollection = EA.GetImpactAsset();
+    var PublishedExternallyCollection = EA.GetPublishedExternally();
+    var RootCauseCollection = EA.GetRootCause();
+    var AttackStatusCollection = EA.GetAttackStatus();
+    var ImpactIncidentCollection = EA.GetImpactIncident();
+    var ImpactTypeCollection = EA.GetImpactType();
+}
+
+
+<div class="search-form" id="div-search-emp">
+
+    <form url="@Url.Action("IS01ReqIndex")" id="IS01SubmitIndex">
+        <div class="row search-sec">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        @Html.DropDownListFor((m) => m.IS01.IncidentTypeId, new SelectList(IncidentTypeCollection, "Key", "Value"), EA.GetMessage("All"), new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        @Html.DropDownListFor((m) => m.IS01.IncidentHandled, new SelectList(YesNoAnswerCollection, "Key", "Value"), EA.GetMessage("All"), new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        @Html.DropDownListFor((m) => m.IS01.CybersecurityIncidentCalculator, new SelectList(YesNoAnswerCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("CybersecurityIncidentCalculator"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        @Html.DropDownListFor((m) => m.IS01.ServiceProviderClassificationId, new SelectList(ServiceProviderClassificationCollection, "Key", "Value"), EA.GetMessage("All"), new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        @Html.DropDownListFor((m) => m.IS01.ImpactedServiceId, new SelectList(ImpactedServiceCollection, "Key", "Value"), EA.GetMessage("All"), new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        @Html.DropDownListFor((m) => m.IS01.SophisticationAttackId, new SelectList(SophisticationAttackCollection, "Key", "Value"), EA.GetMessage("All"), new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        @Html.DropDownListFor((m) => m.IS01.ImpactTypeCompromiseId, new SelectList(ImpactTypeSeverityCollection, "Key", "Value"), EA.GetMessage("All"), new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        @Html.DropDownListFor((m) => m.IS01.ImpactTypeDataLeakageId, new SelectList(ImpactTypeSeverityCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("ImpactTypeDataLeakageId"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        @Html.DropDownListFor((m) => m.IS01.ImpactTypeReputationId, new SelectList(ImpactTypeSeverityCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("ImpactTypeReputationId"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        @Html.DropDownListFor((m) => m.IS01.ImpactTypeDisruptionId, new SelectList(ImpactTypeSeverityCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("ImpactTypeDisruptionId"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        @Html.DropDownListFor((m) => m.IS01.ImpactTypeDestructionId, new SelectList(ImpactTypeSeverityCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("ImpactTypeDestructionId"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        @Html.DropDownListFor((m) => m.IS01.ImpactAssetId, new SelectList(ImpactAssetCollection, "Key", "Value"), EA.GetMessage("All"), new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        @Html.DropDownListFor((m) => m.IS01.PublishedExternallyId, new SelectList(PublishedExternallyCollection, "Key", "Value"), EA.GetMessage("All"), new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        @Html.DropDownListFor((m) => m.IS01.RootCauseId, new SelectList(RootCauseCollection, "Key", "Value"), EA.GetMessage("All"), new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        @Html.DropDownListFor((m) => m.IS01.AttackStatusId, new SelectList(AttackStatusCollection, "Key", "Value"), EA.GetMessage("All"), new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        @Html.DropDownListFor((m) => m.IS01.ImpactIncidentId, new SelectList(ImpactIncidentCollection, "Key", "Value"), EA.GetMessage("All"), new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        @Html.DropDownListFor((m) => m.IS01.ImpactTypeId, new SelectList(ImpactTypeCollection, "Key", "Value"), EA.GetMessage("All"), new { @class = "form-control input-sm" })
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        @Html.DropDownListFor((m) => m.IS01.IsDamagedSystem, new SelectList(YesNoAnswerCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("IsDamagedSystem"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+
+                        <button type="button" class="btn btn-primary wrn-btn btn-serach-submit"> <i class="fa fa-search" aria-hidden="true"></i> @Html.GSText("Search")</button>
+                        <button type="button" formaction="@Url.Action("PrintIS01ReqIndex", "IS")" class="btn btn-default wrn-btn  GSSubmit"><i class="fa fa-print no-print" aria-hidden="true"></i>@Html.GSText("Print")</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.HiddenFor((m) => m.FieldType)
+        @Html.HiddenFor((m) => m.PageIndex)
+        @Html.HiddenFor((m) => m.PageSize)
+        @Html.HiddenFor((m) => m.SortField)
+        @Html.HiddenFor((m) => m.SortDirection)
+        <div class="search-results" id="div-search-results">
+        </div>
+    </form>
+
+
+
+</div>
+
+<script type="text/javascript">
+    SubmitIndex($('#IS01SubmitIndex'));
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

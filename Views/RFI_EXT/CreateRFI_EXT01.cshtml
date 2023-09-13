@@ -1,0 +1,153 @@
+@model Ivanti_FW.Models.RFI_EXT01ModelReq
+
+@{
+    ViewBag.Title = EA.GetMessage("CREATE");
+    //Layout = "~/Views/Shared/_LayoutWork.cshtml";
+}
+
+
+<style>
+    .tooltip-master {
+        display: none;
+    }
+</style>
+
+@section toolbar{
+
+    <div class="page-header mb-0">
+        <div class="col-md-12">
+            <div class="row align-items-end">
+                <div class="col-xl-9">
+                    <div class="d-flex page-header-element align-items-center">
+                        <img src="//cdn.saudisystems.net/V4/assets/images/svgs/service_line/Indv/sims.svg" width="64" height="64" class="me-2">
+                        <div>
+                            <a href="/RFI_EXT/RFI_EXT01dashboard" class="back_btn pb-1 align-items-end mt-0 fs-12">
+                                <i class="mutasil-icon mutasil-icon-40 fa-lg"></i>
+                                @Html.GSText("BACK_TO_RFI_EXT01")
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@{
+    var ImportanceCollection = EA.GetImportance();
+}
+
+
+<form asp-action="CreateRFI_EXT01" asp-controller="RFI_EXT" method="POST" data-ajax="true" data-ajax-complete="fnCompleted" class="CreatePage" id="RFI_EXT01FrmID">
+
+    @Html.AntiForgeryToken()
+
+
+    <!-- form start -->
+    <section class="form-horizontal center" style="margin-bottom:50px;" ">
+        <div class="box-body">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("UserName")</label>
+                <div class="col-sm-8">
+    @Html.ValidationMessageFor(model => model.RFI_EXT01.UserName, "", new { @class = "text-danger" })
+    @Html.EditorFor(model => model.RFI_EXT01.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("UserName"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("Email")</label>
+                <div class="col-sm-8">
+    @Html.ValidationMessageFor(model => model.RFI_EXT01.Email, "", new { @class = "text-danger" })
+    @Html.EditorFor(model => model.RFI_EXT01.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("Email"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("AssignedEntitesId")</label>
+                <div class="col-sm-8">
+    @Html.ValidationMessageFor(model => model.RFI_EXT01.AssignedEntitesId, "", new { @class = "text-danger" })
+    @Html.EditorFor(model => model.RFI_EXT01.AssignedEntitesId, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("AssignedEntitesId") } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("Summary")</label>
+                <div class="col-sm-8">
+    @Html.ValidationMessageFor(model => model.RFI_EXT01.Summary, "", new { @class = "text-danger" })
+    @Html.EditorFor(model => model.RFI_EXT01.Summary, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("Summary"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("CreatedDate")</label>
+                <div class="col-sm-8">
+    @Html.ValidationMessageFor(model => model.RFI_EXT01.CreatedDate, "", new { @class = "text-danger" })
+    @Html.EditorFor(model => model.RFI_EXT01.CreatedDate, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("CreatedDate") } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("Description")</label>
+                <div class="col-sm-8">
+    @Html.ValidationMessageFor(model => model.RFI_EXT01.Description, "", new { @class = "text-danger" })
+    @Html.EditorFor(model => model.RFI_EXT01.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("Description"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("DueDate")</label>
+                <div class="col-sm-8">
+    @Html.ValidationMessageFor(model => model.RFI_EXT01.DueDate, "", new { @class = "text-danger" })
+    @Html.EditorFor(model => model.RFI_EXT01.DueDate, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("DueDate") } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("ReferenceTicket")</label>
+                <div class="col-sm-8">
+    @Html.ValidationMessageFor(model => model.RFI_EXT01.ReferenceTicket, "", new { @class = "text-danger" })
+    @Html.EditorFor(model => model.RFI_EXT01.ReferenceTicket, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("ReferenceTicket"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("Importance")</label>
+                <div class="col-sm-8">
+    @Html.ValidationMessageFor(model => model.RFI_EXT01.ImportanceId, "", new { @class = "text-danger" })
+    @Html.DropDownListFor((m) => m.RFI_EXT01.ImportanceId, new SelectList(ImportanceCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("Importance"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+
+            <div class="form-group File-upload-inline">
+                <div class="text-divider col-sm-12"><span>@Html.GSText("RFI_EXT01_FILES")</span></div>
+                <div class=" file-attachment-section">
+                    <div class="col-sm-12 div-upload-file">
+    @{
+        Html.RenderPartial("UploadFileInline", new GSFunction.Models.UploadFileModel { FileTypes = ".doc,.pdf,.docx,.xls,.xlsx,.jpeg,.jpg,.png,.gif,.tif" });
+    }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="float-end">
+            <button class="btn btn-primary btn-submit">@Html.GSText("ADD_RFI_EXT01")</button>
+            <a href="/RFI_EXT/RFI_EXT01dashboard" class="btn btn-outline-primary">@Html.GSText("Cancel")</a>
+
+        </div>
+    </section>
+
+   
+
+
+
+</form>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.div-upload-file').initUpload({});
+
+    });
+
+    function fnCompleted(msg) {
+        NotifyMsg(msg.responseJSON.statusTitle, msg.responseJSON.statusMessage, msg.responseJSON.status);
+        setTimeout(function () {
+            window.location.href = "/RFI_EXT/RFI_EXT01Dashboard";
+        }, 1000);
+    };
+</script>

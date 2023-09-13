@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Ivanti.Service.BusinessEntites.AttachResponse>
+
+<div class="card card-white card-bordered no-shadow">
+    <div class="card-head b-b d-flex">
+        <div class="flex-grow-1">
+            <header class="title">@Html.GSText("FILE_UPLOADS")</header>
+        </div>
+
+    </div>
+    @if (Model != null && Model.Count() > 0)
+    {
+        <div class="card-body overflow-y p-0" style="max-height: 250px; overflow-y: auto;">
+
+            <div class="maintenance-history-report">
+
+                <table class="table  table-condensed list-view   no-shadow table-white m-0">
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr imageid="@item.RecId">
+                                <td class="file-type width-1">
+                                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                </td>
+                                <td class="ShowFileCls" style="cursor:pointer;">
+                                    @item.ATTACHNAME
+                                </td>
+                                <td class="width-2 text-right"><a href="@Url.Action("DownloadFileAttachment", new { imageID = item.RecId,FileName= item.ATTACHNAME })" class="btn btn-flat"><i class="mdi mdi-file-download f-16"></i>@Html.GSText("download")</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+
+            </div>
+
+
+
+
+
+        </div>
+    }
+    else
+    {
+        @Html.GSNoRecord()
+    }
+</div>

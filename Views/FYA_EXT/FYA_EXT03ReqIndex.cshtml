@@ -1,0 +1,123 @@
+﻿@model Ivanti_FW.Models.ServiceReqModel
+
+@{
+   string DetailsText = @EA.GetMessage("Details");
+    string EditText = @EA.GetMessage("Action");
+}
+
+
+
+
+<div class="row">
+
+                @{
+                    Html.RenderPartial("PagingModelPartial");
+                }
+    @if (@Model.Response.value != null)
+                {
+                    <table id="example1" class="table table-bordered table-striped" style="margin-bottom:50px;">
+            <thead class="thead-dark ReqIndex">
+                <tr>
+                 
+
+
+                    <th>@Html.GSText("SR#")</th>
+                    <th >@Html.GSText("servicename")</th>
+                    <th style="display:none;">@Html.GSText("ServiceType")</th>
+                    <th>@Html.GSText("ServiceStatus")</th>
+                    <th>@Html.GSText("CreatedBy")</th>
+                    <th>@Html.GSText("CreatedDate")</th>
+                    <th class="text-center">
+                        @EditText
+                    </th>
+              
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Response.value)
+                {
+                    <tr reqid="@item.RecId" class="RawClass" style="cursor: pointer">
+                       
+
+
+                        <td class="DetailsDialog">@item.ServiceReqNumber</td>
+                        <td class="DetailsDialog">@item.Service</td>
+                        <td style="display:none;" class="DetailsDialog">@item.Subject</td>
+                        <td class="DetailsDialog">@item.Status</td>
+                        <td class="DetailsDialog">@item.CreatedBy</td>
+                        <td class="DetailsDialog">@item.CreatedDateTime.ToShortDateString()</td>
+                        <td class="text-center ">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="true">
+                                    @Html.GSText("Action")
+                                </button>
+                                @{
+                                    string classDropDownDir = "dropdown-menu-right";
+                                }
+                                @if (LocalizationsManager.GetCurrentLanguage() == "ar")
+                                {
+                                    classDropDownDir = "dropdown-menu-left";
+                                }
+                                <ul class="dropdown-menu @classDropDownDir">
+                                    <li><a class="dropdown-item DetailsDialog"><i class="fa fa-eye" aria-hidden="true"></i> @Html.GSText("Details")</a></li>
+                                    <li><a class="dropdown-item UploadClass"><i class="fa fa-upload" aria-hidden="true"></i> @Html.GSText("ADD_FILES")</a></li>
+                                    <li><a class="dropdown-item">@Html.GSText("ANOTHER")</a></li>
+                                </ul>
+                            </div>
+                        </td>
+
+
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+                }
+                else
+                {
+                    @Html.GSNoRecord()
+                }
+</div><!-- /.row -->
+
+
+
+
+
+
+<script>
+    $(function () {
+       
+    });
+
+     AddFileUpload();
+
+     $('.DetailsDialog').on('click', function () {
+
+        var reqid = $(this).closest('tr').attr("reqid");
+        FYA_EXT03Details(reqid);
+    });
+
+   
+
+ function FYA_EXT03Details(reqid) {
+        $.ajax({
+            type: 'GET',
+            url: "@Url.Action("DetailsFYA_EXT03", "FYA_EXT")",
+            data: {
+                ID: reqid
+            },
+
+            success: function (r) {
+                showModal('@Html.GSText("Details")',null,r,'lg');
+            }
+        });
+    }
+
+  
+
+
+
+</script>
+

@@ -1,0 +1,82 @@
+@model Ivanti_FW.Comon.SearchResultModelBase
+
+<div class="row" style="margin-bottom:20px">
+    <div class="col-sm-4">
+        <div class="PageSize" style="width:100px">
+            @Html.DropDownListFor(m => m.PageSize, new SelectList(EA.GetPagingNumber(), "Key", "Value", Model.PageSize), null, htmlAttributes: new { @class = "form-control", @id = "PageSizeid" })
+        </div>
+    </div>
+    <div class="col-sm-8">
+
+        @if (@LocalizationsManager.GetCurrentLanguage() == "en")
+        {
+            <div class="paging pull-right">
+                @Html.DisplayFor(m => m.TotalRecords)
+                Records
+                (Page
+                <input class="text-box single-line input-validation-error" data-val="true" data-val-required="The PageIndex field is required." id="PageIndexID" name="PageIndex" style="Width:80px;" type="number" value="@Model.PageIndex">
+                of
+                @Html.DisplayFor(m => m.TotalPages)
+                )
+                @Html.HiddenFor(x => x.TotalPages)
+                <button class="btn" type="button" id="AllBack">
+                    <i class="fa fa-backward" aria-hidden="true"></i>
+                </button>
+                <button class="btn" type="button" id="Back">
+                    <i class="fa fa-play fa-rotate-180" aria-hidden="true"></i>
+                </button>
+                <button class="btn" type="button" id="ReloadePage">
+                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                </button>
+                <button class="btn" type="button" id="Forward">
+                    <i class="fa fa-play" aria-hidden="true"></i>
+                </button>
+                <button class="btn" type="button" id="AllForward">
+                    <i class="fa fa-forward" aria-hidden="true"></i>
+                </button>
+            </div>
+        }
+        else
+        {
+
+
+            <div class="paging pull-left">
+                @Html.DisplayFor(m => m.TotalRecords)
+                @Html.GSText("Records")
+                (@Html.GSText("Page")
+                <input class="text-box single-line input-validation-error" data-val="true" data-val-required="The PageIndex field is required." id="PageIndexID" name="PageIndex" style="Width:80px;" type="number" value="@Model.PageIndex">
+                @Html.GSText("of")
+                @Html.DisplayFor(m => m.TotalPages)
+                )
+                @Html.HiddenFor(x => x.TotalPages)
+                <button class="btn" type="button" id="AllBack">
+                    <i class="fa fa-forward" aria-hidden="true"></i>
+                </button>
+
+                <button class="btn" type="button" id="Back">
+                    <i class="fa fa-play" aria-hidden="true"></i>
+                </button>
+
+                <button class="btn" type="button" id="ReloadePage">
+                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                </button>
+
+                <button class="btn" type="button" id="Forward">
+                    <i class="fa fa-play fa-rotate-180" aria-hidden="true"></i>
+                </button>
+                <button class="btn" type="button" id="AllForward">
+                    <i class="fa fa-backward" aria-hidden="true"></i>
+                </button>
+
+            </div>
+        }
+
+
+    </div>
+</div>
+
+
+
+<script>
+    PaggingFunction();
+</script>

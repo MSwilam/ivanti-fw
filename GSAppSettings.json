@@ -1,0 +1,28 @@
+[
+  {
+    "AppSettings": [
+      {
+        "Text": "pathSolution",
+        "Val": "C:\\Users\\MSwil\\Desktop\\DevOps\\Assets\\UploadedFiles\\"
+      },
+      {
+        "Text": "FilePath",
+        "Val": "C:\\Users\\MSwil\\Desktop\\DevOps\\Assets\\UploadedFiles\\"
+      },
+      {
+        "Text": "AppEmail",
+        "Val": "swilam2100@gmail.com"
+      },
+      {
+        "Text": "HttpRequest",
+        "Val": "http://localhost:12314"
+      }
+    ],
+    "ConnectionString": [
+      {
+        "Text": "postgresConnectionString",
+        "Val": "Server=127.0.0.1;Port=5432;UserID=postgres;Password=Ghostmon2100@;Database=hr"
+      }
+    ]
+  }
+]

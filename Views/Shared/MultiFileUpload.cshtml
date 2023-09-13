@@ -1,0 +1,13 @@
+@model GSFunction.Models.UploadFileModel
+
+<div class="form-group">
+    <label for="inputEmail3" class="col-sm-4 control-label">@Html.ResourceText("FilePath")</label>
+    <div class="col-sm-8">
+        <button type="button" id="btn_files" CounterFile="1" fileID="file_1" class="btn btn-primary"  multiple accept="@((Model!= null)?Model.FileTypes:"*.*")" ><i class="fas fa-upload"></i>  Upload Files</button>
+        <input class="MultiFiles" type='file' id='file_1' style="position:absolute;display:none;" name="file"  />
+
+        <table class="table table-bordered table-striped ">
+            <tbody class="FileTableClass"></tbody>
+        </table>
+    </div>
+</div>

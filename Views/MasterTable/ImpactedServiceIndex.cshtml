@@ -1,0 +1,51 @@
+@model Ivanti_FW.Models.ImpactedServiceSearchModel
+
+
+
+<div class="search-form" id="div-search-emp">
+
+    <form url="@Url.Action("ImpactedServiceReqIndex")" id="ImpactedServiceSubmitIndex">
+        <div class="row search-sec">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                        @Html.EditorFor((m) => m.ImpactedService.ImpactedServiceName, new { htmlAttributes = new { @class = "form-control input-sm ImpactedServiceNameAC", @placeholder = Html.GSText("ImpactedService_NAME") } })
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+
+                        <button type="button" class="btn btn-primary wrn-btn btn-serach-submit"> <i class="fa fa-search" aria-hidden="true"></i> @Html.GSText("Search")</button>
+                        <button type="button" formaction="@Url.Action("PrintImpactedServiceReqIndex", "MasterTable")" class="btn btn-default wrn-btn  GSSubmit"><i class="fa fa-print no-print" aria-hidden="true"></i>@Html.GSText("Print")</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.HiddenFor((m) => m.FieldType)
+        @Html.HiddenFor((m) => m.PageIndex)
+        @Html.HiddenFor((m) => m.PageSize)
+        @Html.HiddenFor((m) => m.SortField)
+        @Html.HiddenFor((m) => m.SortDirection)
+        <div class="search-results" id="div-search-results">
+        </div>
+    </form>
+
+</div>
+<script type="text/javascript">
+    SubmitIndex($('#ImpactedServiceSubmitIndex'));
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

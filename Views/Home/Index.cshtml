@@ -1,0 +1,58 @@
+﻿@model Ivanti_FW.Models.SideBarMenuModel
+
+@{
+
+//Layout = "~/Views/Shared/_LayoutWork.cshtml";
+
+}
+<style>
+    .widtha {
+        min-width: 100%
+    }
+</style>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+
+</div>
+<div class="row row-flex grid">
+    @foreach (var item in Model.SideBarMenuList)
+    {
+        <div class="col-xl-4 col-lg-4 col-md-6 mb-2 grid-item filter-complaints service-box" id="service_2" data-service-category-id="3" data-service-name="تصعيد شكاوى الاتصالات" data-service-description="تتيح الخدمة للمستفيد تصعيد الشكوى لدى الهيئة في حال إغلاق الشكوى من قبل مقدم الخدمة دون معالجة أو مرور 5 أيام دون حل" data-service-is-favorite="False">
+            <div class="service_item">
+                <div class="list-group-item  align-items-center py-3 widtha ">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if (LocalizationsManager.GetCurrentLanguage() == "ar")
+                            {
+                                <h5 class="ms-2">  @item.ArabicName </h5>
+                            }
+                            else
+                            {
+                                <h5 class="ms-2"> @item.EnglishName </h5>
+                            }
+                        </div>
+                    </div>
+                    <div class="row btn-holder gx-2">
+                        @if (!string.IsNullOrEmpty(@item.CreatePath))
+                        {
+                            <div class="col">
+                                <a href="@item.CreatePath" class="btn btn-block btn-primary">
+                                    <b>
+                                        @Html.GSText("Create")
+                                    </b>
+                                </a>
+                            </div>
+                        }
+                        <div class="col">
+                            <a href="@item.Path" class="btn btn-block btn-secondary"><b>@Html.GSText("Details")</b></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    }
+</div>

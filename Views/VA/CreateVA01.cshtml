@@ -1,0 +1,198 @@
+@model Ivanti_FW.Models.VA01ModelReq
+
+@{
+    ViewBag.Title = EA.GetMessage("CREATE");
+    //Layout = "~/Views/Shared/_LayoutWork.cshtml";
+}
+
+
+<style>
+    .tooltip-master {
+        display: none;
+    }
+</style>
+
+@section toolbar{
+
+    <div class="page-header mb-0">
+        <div class="col-md-12">
+            <div class="row align-items-end">
+                <div class="col-xl-9">
+                    <div class="d-flex page-header-element align-items-center">
+                        <img src="//cdn.saudisystems.net/V4/assets/images/svgs/service_line/Indv/sims.svg" width="64" height="64" class="me-2">
+                        <div>
+                            <a href="/VA/VA01dashboard" class="back_btn pb-1 align-items-end mt-0 fs-12">
+                                <i class="mutasil-icon mutasil-icon-40 fa-lg"></i>
+                                @Html.GSText("BACK_TO_VA01")
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@{
+    var VulnerabilityListCollection = EA.GetVulnerabilityList();
+    var SeverityCollection = EA.GetSeverity();
+    var VulnerabilityTypeCollection = EA.GetVulnerabilityType();
+    var YesNoAnswerCollection = EA.GetYesNoAnswer();
+}
+
+
+<form asp-action="CreateVA01" asp-controller="VA" method="POST" data-ajax="true" data-ajax-complete="fnCompleted" class="CreatePage" id="VA01FrmID">
+
+    @Html.AntiForgeryToken()
+
+
+    <!-- form start -->
+    <section class="form-horizontal center" style="margin-bottom:50px;">
+        <div class="box-body">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("UserName")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.VA01.UserName, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.VA01.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("UserName"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("Email")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.VA01.Email, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.VA01.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("Email"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("TLPId")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.VA01.TLPId, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.VA01.TLPId, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("TLPId") } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("VulnerabilityDescription")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.VA01.VulnerabilityDescription, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(model => model.VA01.VulnerabilityDescription,  new { @class = "form-control mb-4", @placeholder = @Html.GSText("VulnerabilityDescription"), @maxlength = 4000 ,@rows = 4 } )
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("VulnerabilityList")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.VA01.VulnerabilityListId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.VA01.VulnerabilityListId, new SelectList(VulnerabilityListCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("VulnerabilityList"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("CVEID")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.VA01.CVEID, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.VA01.CVEID, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("CVEID"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("Severity")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.VA01.SeverityId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.VA01.SeverityId, new SelectList(SeverityCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("Severity"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("VulnerabilityType")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.VA01.VulnerabilityTypeId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.VA01.VulnerabilityTypeId, new SelectList(VulnerabilityTypeCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("VulnerabilityType"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("Remediation")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.VA01.Remediation, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(model => model.VA01.Remediation,  new { @class = "form-control mb-4", @placeholder = @Html.GSText("Remediation"), @maxlength = 4000 ,@rows = 4 } )
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("ReportReferences")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.VA01.ReportReferences, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.VA01.ReportReferences, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("ReportReferences"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("Notes")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.VA01.Notes, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(model => model.VA01.Notes,  new { @class = "form-control mb-4", @placeholder = @Html.GSText("Notes"), @maxlength = 4000 ,@rows = 4 } )
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("YesNoAnswer")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.VA01.NoActionNeeded, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.VA01.NoActionNeeded, new SelectList(YesNoAnswerCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("YesNoAnswer"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("FeedbackNeeded")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.VA01.FeedbackNeeded, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.VA01.FeedbackNeeded, new SelectList(YesNoAnswerCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("YesNoAnswer"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("DueDate")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.VA01.DueDate, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.VA01.DueDate, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("DueDate") } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("AssignedEntitesId")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.VA01.AssignedEntitesId, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.VA01.AssignedEntitesId, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("AssignedEntitesId") } })
+                </div>
+            </div>
+
+            <div class="form-group File-upload-inline">
+                <div class="text-divider col-sm-12"><span>@Html.GSText("VA01_FILES")</span></div>
+                <div class=" file-attachment-section">
+                    <div class="col-sm-12 div-upload-file">
+                        @{
+                            Html.RenderPartial("UploadFileInline", new GSFunction.Models.UploadFileModel { FileTypes = ".doc,.pdf,.docx,.xls,.xlsx,.jpeg,.jpg,.png,.gif,.tif" });
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="float-end">
+            <button class="btn btn-primary btn-submit">@Html.GSText("ADD_VA01")</button>
+            <a href="/VA/VA01dashboard" class="btn btn-outline-primary">@Html.GSText("Cancel")</a>
+
+        </div>
+    </section>
+
+    
+
+
+
+</form>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+    });
+
+    function fnCompleted(msg) {
+        NotifyMsg(msg.responseJSON.statusTitle, msg.responseJSON.statusMessage, msg.responseJSON.status);
+        setTimeout(function () {
+            window.location.href = "/VA/VA01Dashboard";
+        }, 1000);
+    };
+</script>

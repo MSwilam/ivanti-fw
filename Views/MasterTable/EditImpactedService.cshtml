@@ -1,0 +1,78 @@
+@model Ivanti_FW.Models.ImpactedServiceModelReq
+
+
+
+<style>
+    .tooltip-master {
+        display: none;
+    }
+</style>
+
+
+
+<form asp-action="EditImpactedService" asp-controller="MasterTable" method="POST" data-ajax="true" data-ajax-complete="fnCompleted" class="CreatePage" id="ImpactedServiceFrmID">
+
+    @Html.AntiForgeryToken()
+
+
+                                <div class="box-body">
+				    <div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("ArabicName")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.ImpactedService.ArabicName, "", new { @class = "text-danger" })
+			<div class="d-flex">
+		@Html.EditorFor(model => model.ImpactedService.ArabicName, new { htmlAttributes = new { @class = "form-control ArabicCheckList", @placeholder = @Html.GSText("ARABICNAME"), @maxlength = 200 } })
+		<button type="button" class="btn btn-icon-toggle btn-warning tooltip-master" data-tooltip-content="#tooltip_ArabicCheck">
+		<i class="mdi mdi-info-outline"></i>
+		</button>
+	</div>
+	</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("EnglishName")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.ImpactedService.EnglishName, "", new { @class = "text-danger" })
+			<div class="d-flex">
+		@Html.EditorFor(model => model.ImpactedService.EnglishName, new { htmlAttributes = new { @class = "form-control EnglishCheckList", @placeholder = @Html.GSText("EnglishName"), @maxlength = 200 } })
+		<button type="button" class="btn btn-icon-toggle btn-warning tooltip-master" data-tooltip-content="#tooltip_EnglishCheck">
+		<i class="mdi mdi-info-outline"></i>
+		</button>
+	</div>
+	</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("Score")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.ImpactedService.Score, "", new { @class = "text-danger" })
+			@Html.EditorFor(model => model.ImpactedService.Score, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("Score") } })
+		</div>
+	</div>
+	
+				    
+                                </div>
+
+                       
+
+		 @Html.HiddenFor(m => m.ImpactedService.Id)
+            <div class="modal-footer border-0">
+        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">@Html.GSText("Close")</button>
+        <button type="submit" class="btn btn-primary">@Html.GSText("Save")</button>
+    </div>
+</form>
+
+
+
+    <script type="text/javascript">
+	$(document).ready(function () {
+	
+	
+  	});
+
+       function fnCompleted(msg) {
+         NotifyMsg(msg.responseJSON.statusTitle, msg.responseJSON.statusMessage, msg.responseJSON.status);
+        setTimeout(function () {
+            window.location.href = "/MasterTable/ImpactedServiceDashboard";
+        }, 1000);
+    };
+
+</script>

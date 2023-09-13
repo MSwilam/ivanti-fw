@@ -1,0 +1,181 @@
+@model Ivanti_FW.Models.Is05ModelReq
+
+@{
+    ViewBag.Title = EA.GetMessage("CREATE");
+    //Layout = "~/Views/Shared/_LayoutWork.cshtml";
+}
+
+
+<style>
+    .tooltip-master {
+        display: none;
+    }
+</style>
+
+@section toolbar{
+
+    <div class="page-header mb-0">
+        <div class="col-md-12">
+            <div class="row align-items-end">
+                <div class="col-xl-9">
+                    <div class="d-flex page-header-element align-items-center">
+                        <img src="//cdn.saudisystems.net/V4/assets/images/svgs/service_line/Indv/sims.svg" width="64" height="64" class="me-2">
+                        <div>
+                            <a href="/IS/Is05dashboard" class="back_btn pb-1 align-items-end mt-0 fs-12">
+                                <i class="mutasil-icon mutasil-icon-40 fa-lg"></i>
+                                @Html.GSText("BACK_TO_Is05")
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@{
+	 var  YesNoAnswerCollection = EA.GetYesNoAnswer(); 
+	 var  SeverityLevelCollection = EA.GetSeverityLevel(); 
+	 var  IRTypeCollection = EA.GetIRType(); 
+	 var  ClosureReasonCollection = EA.GetClosureReason(); 
+	}
+	
+
+<form asp-action="CreateIs05" asp-controller="IS" method="POST" data-ajax="true" data-ajax-complete="fnCompleted" class="CreatePage" id="Is05FrmID">
+
+    @Html.AntiForgeryToken()
+
+
+                            <!-- form start -->
+                            <section class="form-horizontal center">
+                                <div class="box-body">
+                                    <div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("YesNoAnswer")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.Is05.NotifyNCA, "", new { @class = "text-danger" })
+			@Html.DropDownListFor((m) => m.Is05.NotifyNCA, new SelectList(YesNoAnswerCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("YesNoAnswer"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("NotifyDMO")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.Is05.NotifyDMO, "", new { @class = "text-danger" })
+			@Html.DropDownListFor((m) => m.Is05.NotifyDMO, new SelectList(YesNoAnswerCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("YesNoAnswer"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("NotifyTelecomCrisis")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.Is05.NotifyTelecomCrisis, "", new { @class = "text-danger" })
+			@Html.DropDownListFor((m) => m.Is05.NotifyTelecomCrisis, new SelectList(YesNoAnswerCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("YesNoAnswer"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("SeverityLevel")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.Is05.SeverityLevelId, "", new { @class = "text-danger" })
+			@Html.DropDownListFor((m) => m.Is05.SeverityLevelId, new SelectList(SeverityLevelCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("SeverityLevel"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("IncidentResolved")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.Is05.IncidentResolved, "", new { @class = "text-danger" })
+			@Html.DropDownListFor((m) => m.Is05.IncidentResolved, new SelectList(YesNoAnswerCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("YesNoAnswer"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("InputToMedia")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.Is05.InputToMedia, "", new { @class = "text-danger" })
+			@Html.DropDownListFor((m) => m.Is05.InputToMedia, new SelectList(YesNoAnswerCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("YesNoAnswer"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("TechnicalAssistanceNedded")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.Is05.TechnicalAssistanceNedded, "", new { @class = "text-danger" })
+			@Html.DropDownListFor((m) => m.Is05.TechnicalAssistanceNedded, new SelectList(YesNoAnswerCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("YesNoAnswer"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("IRType")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.Is05.IRTypeId, "", new { @class = "text-danger" })
+			@Html.DropDownListFor((m) => m.Is05.IRTypeId, new SelectList(IRTypeCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("IRType"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("Advice")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.Is05.Advice, "", new { @class = "text-danger" })
+			@Html.EditorFor(model => model.Is05.Advice, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("Advice"), @maxlength = 200 } })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("ThirdPartyNomination")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.Is05.ThirdPartyNomination, "", new { @class = "text-danger" })
+			@Html.EditorFor(model => model.Is05.ThirdPartyNomination, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("ThirdPartyNomination"), @maxlength = 200 } })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("AnalystNote")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.Is05.AnalystNote, "", new { @class = "text-danger" })
+			@Html.EditorFor(model => model.Is05.AnalystNote, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("AnalystNote"), @maxlength = 200 } })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("TeamLeaderNote")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.Is05.TeamLeaderNote, "", new { @class = "text-danger" })
+			@Html.EditorFor(model => model.Is05.TeamLeaderNote, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("TeamLeaderNote"), @maxlength = 200 } })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("ClosureReason")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.Is05.ClosureReasonId, "", new { @class = "text-danger" })
+			@Html.DropDownListFor((m) => m.Is05.ClosureReasonId, new SelectList(ClosureReasonCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("ClosureReason"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("ClosingNote")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.Is05.ClosingNote, "", new { @class = "text-danger" })
+			@Html.EditorFor(model => model.Is05.ClosingNote, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("ClosingNote"), @maxlength = 200 } })
+		</div>
+	</div>
+	
+				    
+                                </div>
+
+                            </section>
+                      
+<div class="modal-footer border-0 float-start">
+         <button class="btn btn-primary btn-submit">@Html.GSText("ADD_Is05")</button>
+        <a href="/IS/Is05dashboard" class="btn btn-outline-primary">@Html.GSText("Cancel")</a>
+       
+    </div>
+
+   
+       
+</form>
+
+
+
+    <script type="text/javascript">
+	$(document).ready(function () {
+	
+	
+  	});
+
+     function fnCompleted(msg) {
+        NotifyMsg(msg.responseJSON.statusTitle, msg.responseJSON.statusMessage, msg.responseJSON.status);
+        setTimeout(function () {
+            window.location.href = "/IS/Is05Dashboard";
+        }, 1000);
+    };
+</script>

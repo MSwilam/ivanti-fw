@@ -1,0 +1,91 @@
+@model Ivanti_FW.Models.MNTR02ModelReq
+
+@{
+    ViewBag.Title = EA.GetMessage("CREATE");
+    //Layout = "~/Views/Shared/_LayoutWork.cshtml";
+}
+
+
+<style>
+    .tooltip-master {
+        display: none;
+    }
+</style>
+
+@section toolbar{
+
+    <div class="page-header mb-0">
+        <div class="col-md-12">
+            <div class="row align-items-end">
+                <div class="col-xl-9">
+                    <div class="d-flex page-header-element align-items-center">
+                        <img src="//cdn.saudisystems.net/V4/assets/images/svgs/service_line/Indv/sims.svg" width="64" height="64" class="me-2">
+                        <div>
+                            <a href="/MNTR/MNTR02dashboard" class="back_btn pb-1 align-items-end mt-0 fs-12">
+                                <i class="mutasil-icon mutasil-icon-40 fa-lg"></i>
+                                @Html.GSText("BACK_TO_MNTR02")
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<form asp-action="CreateMNTR02" asp-controller="MNTR" method="POST" data-ajax="true" data-ajax-complete="fnCompleted" class="CreatePage" id="MNTR02FrmID">
+
+    @Html.AntiForgeryToken()
+
+
+                            <!-- form start -->
+                            <section class="form-horizontal center">
+                                <div class="box-body">
+                                    <div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("USERID")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.MNTR02.UserID, "", new { @class = "text-danger" })
+			@Html.EditorFor(model => model.MNTR02.UserID, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("USERID") } })
+		</div>
+	</div>
+	
+				    <div class="form-group File-upload-inline">
+	                <div class="text-divider col-sm-12"><span>@Html.GSText("MNTR02_FILES")</span></div>
+	                <div class=" file-attachment-section">
+	                    <div class="col-sm-12 div-upload-file">
+	                        @{ Html.RenderPartial("UploadFileInline", new GSFunction.Models.UploadFileModel { FileTypes = ".doc,.pdf,.docx,.xls,.xlsx,.jpeg,.jpg,.png,.gif,.tif" });}
+	                    </div>
+	                </div>
+	            </div>
+	
+                                </div>
+
+                            </section>
+                      
+<div class="modal-footer border-0 float-start">
+         <button class="btn btn-primary btn-submit">@Html.GSText("ADD_MNTR02")</button>
+        <a href="/MNTR/MNTR02dashboard" class="btn btn-outline-primary">@Html.GSText("Cancel")</a>
+       
+    </div>
+
+   
+       
+</form>
+
+
+
+    <script type="text/javascript">
+	$(document).ready(function () {
+	
+	
+  	});
+
+     function fnCompleted(msg) {
+        NotifyMsg(msg.responseJSON.statusTitle, msg.responseJSON.statusMessage, msg.responseJSON.status);
+        setTimeout(function () {
+            window.location.href = "/MNTR/MNTR02Dashboard";
+        }, 1000);
+    };
+</script>

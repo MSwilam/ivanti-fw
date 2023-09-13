@@ -1,0 +1,53 @@
+﻿@model Ivanti_FW.Models.SideBarMenuModel
+
+@*@foreach (var item in Model.SideBarMenuList)
+{
+    <a class="list-group-item d-flex align-items-center py-3 "
+   href="@item.Path">
+        <i class="mutasil-icon mutasil-icon-20 fa-lg"></i>
+        @if (LocalizationsManager.GetCurrentLanguage() == "ar")
+        {
+            <span class="ms-2">  @item.ArabicName </span>
+        }
+        else
+        {
+            <span class="ms-2">  @item.EnglishName </span>
+        }
+    </a>
+    <hr class="light">
+
+}*@
+
+<div class="row row-flex grid">
+    @foreach (var item in Model.SideBarMenuList)
+    {
+        <div class="col-xl-4 col-lg-4 col-md-6 mb-2 grid-item filter-complaints service-box" id="service_2" data-service-category-id="3" data-service-name="تصعيد شكاوى الاتصالات" data-service-description="تتيح الخدمة للمستفيد تصعيد الشكوى لدى الهيئة في حال إغلاق الشكوى من قبل مقدم الخدمة دون معالجة أو مرور 5 أيام دون حل" data-service-is-favorite="False">
+            <div class="service_item">
+                <div class="d-flex align-items-center mt-1">
+                    @if (LocalizationsManager.GetCurrentLanguage() == "ar")
+                    {
+                        <h3 class="m-0">@item.ArabicName</h3>
+                    }
+                    else
+                    {
+                        <h3 class="m-0">@item.EnglishName</h3>
+                    }
+
+                </div>
+                <div class="row btn-holder gx-2">
+
+                    @*<div class="col">
+                        <a href="@item.CreatePath" class="btn btn-block btn-primary">
+                            <b>
+                                @Html.GSText("Create")
+                            </b>
+                        </a>
+                    </div>*@
+                    <div class="col">
+                        <a href="@item.Path" class="btn btn-block btn-secondary"><b>@Html.GSText("Details")</b></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

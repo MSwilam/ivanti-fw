@@ -1,0 +1,108 @@
+@model Ivanti_FW.Models.SendingCorrectiveActionsModelReq
+
+@{
+    ViewBag.Title = EA.GetMessage("CREATE");
+    //Layout = "~/Views/Shared/_LayoutWork.cshtml";
+}
+
+
+<style>
+    .tooltip-master {
+        display: none;
+    }
+</style>
+
+@section toolbar{
+
+    <div class="page-header mb-0">
+        <div class="col-md-12">
+            <div class="row align-items-end">
+                <div class="col-xl-9">
+                    <div class="d-flex page-header-element align-items-center">
+                        <img src="//cdn.saudisystems.net/V4/assets/images/svgs/service_line/Indv/sims.svg" width="64" height="64" class="me-2">
+                        <div>
+                            <a href="/FCR/SendingCorrectiveActionsdashboard" class="back_btn pb-1 align-items-end mt-0 fs-12">
+                                <i class="mutasil-icon mutasil-icon-40 fa-lg"></i>
+                                @Html.GSText("BACK_TO_SendingCorrectiveActions")
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@{
+	 var  YesNoAnswerCollection = EA.GetYesNoAnswer(); 
+	}
+	
+
+<form asp-action="CreateSendingCorrectiveActions" asp-controller="FCR" method="POST" data-ajax="true" data-ajax-complete="fnCompleted" class="CreatePage" id="SendingCorrectiveActionsFrmID">
+
+    @Html.AntiForgeryToken()
+
+
+                            <!-- form start -->
+                            <section class="form-horizontal center">
+                                <div class="box-body">
+                                    <div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("CorrectiveActions")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.SendingCorrectiveActions.CorrectiveActions, "", new { @class = "text-danger" })
+			@Html.EditorFor(model => model.SendingCorrectiveActions.CorrectiveActions, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("CorrectiveActions"), @maxlength = 200 } })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("DueDate")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.SendingCorrectiveActions.DueDate, "", new { @class = "text-danger" })
+			@Html.EditorFor(model => model.SendingCorrectiveActions.DueDate, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("DueDate") } })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("YesNoAnswer")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.SendingCorrectiveActions.Complete, "", new { @class = "text-danger" })
+			@Html.DropDownListFor((m) => m.SendingCorrectiveActions.Complete, new SelectList(YesNoAnswerCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("YesNoAnswer"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("Notes")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.SendingCorrectiveActions.Notes, "", new { @class = "text-danger" })
+			@Html.TextAreaFor(model => model.SendingCorrectiveActions.Notes,  new { @class = "form-control mb-4", @placeholder = @Html.GSText("Notes"), @maxlength = 4000 ,@rows = 4 } )
+		</div>
+	</div>
+	
+				    
+                                </div>
+
+                            </section>
+                      
+<div class="modal-footer border-0 float-start">
+         <button class="btn btn-primary btn-submit">@Html.GSText("ADD_SendingCorrectiveActions")</button>
+        <a href="/FCR/SendingCorrectiveActionsdashboard" class="btn btn-outline-primary">@Html.GSText("Cancel")</a>
+       
+    </div>
+
+   
+       
+</form>
+
+
+
+    <script type="text/javascript">
+	$(document).ready(function () {
+	
+	
+  	});
+
+     function fnCompleted(msg) {
+        NotifyMsg(msg.responseJSON.statusTitle, msg.responseJSON.statusMessage, msg.responseJSON.status);
+        setTimeout(function () {
+            window.location.href = "/FCR/SendingCorrectiveActionsDashboard";
+        }, 1000);
+    };
+</script>

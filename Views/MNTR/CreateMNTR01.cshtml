@@ -1,0 +1,177 @@
+@model Ivanti_FW.Models.MNTR01ModelReq
+
+@{
+    ViewBag.Title = EA.GetMessage("CREATE");
+    //Layout = "~/Views/Shared/_LayoutWork.cshtml";
+}
+
+
+<style>
+    .tooltip-master {
+        display: none;
+    }
+</style>
+
+@section toolbar{
+
+    <div class="page-header mb-0">
+        <div class="col-md-12">
+            <div class="row align-items-end">
+                <div class="col-xl-9">
+                    <div class="d-flex page-header-element align-items-center">
+                        <img src="//cdn.saudisystems.net/V4/assets/images/svgs/service_line/Indv/sims.svg" width="64" height="64" class="me-2">
+                        <div>
+                            <a href="/MNTR/MNTR01dashboard" class="back_btn pb-1 align-items-end mt-0 fs-12">
+                                <i class="mutasil-icon mutasil-icon-40 fa-lg"></i>
+                                @Html.GSText("BACK_TO_MNTR01")
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@{
+    var TLPCollection = EA.GetTLP();
+    var VulnerabilityListCollection = EA.GetVulnerabilityList();
+    var SeverityCollection = EA.GetSeverity();
+    var VulnerabilityTypeCollection = EA.GetVulnerabilityType();
+}
+
+
+<form asp-action="CreateMNTR01" asp-controller="MNTR" method="POST" data-ajax="true" data-ajax-complete="fnCompleted" class="CreatePage" id="MNTR01FrmID">
+
+    @Html.AntiForgeryToken()
+
+
+    <!-- form start -->
+    <section class="form-horizontal center" style="margin-bottom:50px;">
+        <div class="box-body">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("USERNAME")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.MNTR01.UserName, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.MNTR01.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("USERNAME"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("EMAIL")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.MNTR01.Email, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.MNTR01.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("EMAIL"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("TLP")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.MNTR01.TLPId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.MNTR01.TLPId, new SelectList(TLPCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("TLP"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("VULNERABILITYDESCRIPTION")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.MNTR01.VulnerabilityDescription, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.MNTR01.VulnerabilityDescription, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("VULNERABILITYDESCRIPTION"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("VulnerabilityList")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.MNTR01.VulnerabilityListId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.MNTR01.VulnerabilityListId, new SelectList(VulnerabilityListCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("VulnerabilityList"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("CVEID")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.MNTR01.CVEID, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.MNTR01.CVEID, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("CVEID"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("Severity")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.MNTR01.SeverityId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.MNTR01.SeverityId, new SelectList(SeverityCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("Severity"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("VulnerabilityType")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.MNTR01.VulnerabilityTypeId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.MNTR01.VulnerabilityTypeId, new SelectList(VulnerabilityTypeCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("VulnerabilityType"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("REMEDIATIONDUEDATE")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.MNTR01.RemediationDueDate, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.MNTR01.RemediationDueDate, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("REMEDIATIONDUEDATE") } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("SOURCE")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.MNTR01.Source, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.MNTR01.Source, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("SOURCE"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("NOTES")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.MNTR01.Notes, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.MNTR01.Notes, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("NOTES"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("ASSIGNEDENTITESID")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.MNTR01.AssignedEntitesId, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.MNTR01.AssignedEntitesId, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("ASSIGNEDENTITESID") } })
+                </div>
+            </div>
+
+            <div class="form-group File-upload-inline">
+                <div class="text-divider col-sm-12"><span>@Html.GSText("MNTR01_FILES")</span></div>
+                <div class=" file-attachment-section">
+                    <div class="col-sm-12 div-upload-file">
+                        @{
+                            Html.RenderPartial("UploadFileInline", new GSFunction.Models.UploadFileModel { FileTypes = ".doc,.pdf,.docx,.xls,.xlsx,.jpeg,.jpg,.png,.gif,.tif" });
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="float-end">
+            <button class="btn btn-primary btn-submit">@Html.GSText("ADD_MNTR01")</button>
+            <a href="/MNTR/MNTR01dashboard" class="btn btn-outline-primary">@Html.GSText("Cancel")</a>
+
+        </div>
+    </section>
+
+ 
+
+
+
+</form>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.div-upload-file').initUpload({});
+
+    });
+
+    function fnCompleted(msg) {
+        NotifyMsg(msg.responseJSON.statusTitle, msg.responseJSON.statusMessage, msg.responseJSON.status);
+        setTimeout(function () {
+            window.location.href = "/MNTR/MNTR01Dashboard";
+        }, 1000);
+    };
+</script>

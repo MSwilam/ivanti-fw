@@ -1,0 +1,275 @@
+﻿@*
+    This partial controls the top menu of the AdminLTE Template, being called automatically by _AdminLteLayout
+       TODO: All of the content in here is stand-in that must be replaced by the real behavior of your app
+*@
+
+@{
+    ViewBag.Layout = null;
+}
+@if (@CultureHelper.GetCurrentNeutralCulture() == "ar")
+{
+
+
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="@Url.Action("Index", "Home")" class="logo btn-danger">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+
+            <span class="logo-mini"><i class="fa fa-home"></i></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>@Html.ResourceText("ASSETS_APP")</b> </span>
+        </a>
+
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <a href="" class="sidebar-toggle" data-toggle="offcanvas" onclick="test()" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+
+            <div class="navbar-form navbar-right">
+                <div class="input-group">
+                    <input type="text" class="form-control MenuName Ar" placeholder="@Html.ResourceText("Search")">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default searchMenu" type="button">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li><a id="LinkIncrease" href="#" style="font-size:19px;">A<span id="increaseSpan"></span></a></li>
+                    <li><a id="LinkDecrease" href="#" style="font-size:11px;">A<span id="decreaseSpan"></span></a></li>
+                    @*<li><a href="@Url.Action("SetCulture", "Home", new { culture = "ar-AE", CurrentPage = @ViewContext.RouteData.Values["action"], CurrentControl1 = @ViewContext.RouteData.Values["controller"] })"> <i class="fa fa-language"></i> </a></li>*@
+                    <li><a href="@Url.Action("SetCulture", "Home", new { culture = "en-us", CurrentPage = @ViewContext.RouteData.Values["action"], CurrentControl1 = @ViewContext.RouteData.Values["controller"] })"> EN </a></li>
+
+                    <li class="dropdown notifications-menu">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-users"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li class="header text-bold text-center">
+                                @Html.ResourceText("UsersManagement")
+                            </li>
+                            <li>
+                                <ul class="menu">
+                                    <li>
+                                        <a href="@Url.Action("UsersList", "GsAccount")">
+                                            <i class="fa fa-users text-aqua"></i> @Html.ResourceText("UsersList")
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("RolesList", "GsAccount")">
+                                            <i class="fa fa-users text-aqua"></i>@Html.ResourceText("RolesList")
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("CreateRole", "GsAccount")">
+                                            <i class="fa fa-warning text-yellow"></i>@Html.ResourceText("AddNewRole")
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("ManageUserRoles", "GsAccount")">
+                                            <i class="fa fa-users text-red"></i>@Html.ResourceText("ManageusersRoles")
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="~/Assets/UploadedFiles/NoImage.jpg" class="user-image" alt="User Image" />
+                            <span class="hidden-xs">محمود حمدى سويلم</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img src="~/Assets/UploadedFiles/NoImage.jpg" class="img-circle" alt="User Image" />
+                                <p>
+                                    <small>محمود حمدى سويلم </small>
+                                </p>
+                            </li>
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="@Url.Action("ProfileUser","GsAccount")" class="btn btn-default btn-flat"> @Html.ResourceText("Profile")</a>
+                                </div>
+                                @using (Html.BeginForm("LogOff", "GsAccount", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                <li>
+
+                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-default btn-flat">@Html.ResourceText("Logoff")</a>
+                                </li>
+                            }
+                            </ul>
+
+                        </li>
+
+                        @*<li class="dropdown user user-menu">
+
+                                <ul class="dropdown-menu">
+
+                                    <li class="user-header">
+                                        <img src=@ss.file class="img-circle" alt="User Image" />
+                                        <p>
+                                            @User.Identity.Name - Web Developer
+                                            <small>Member since Nov. 2014</small>
+                                        </p>
+                                    </li>
+                                    Menu Footer
+
+                                </ul>
+                            </li>*@
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+    }
+    else
+    {
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="@Url.Action("Index", "Home")" class="logo">
+                <span class="logo-mini"><i class="fa fa-home"></i></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>@Html.ResourceText("ASSETS_APP")</b> </span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+
+                <a href="" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+
+                <div class="navbar-form navbar-left">
+                    <div class="input-group">
+                        <input type="text" class="form-control MenuName En" placeholder="@Html.ResourceText("Search")">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default searchMenu" type="button">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li><a id="LinkIncrease" href="#" style="font-size:19px;">A<span id="increaseSpan"></span></a></li>
+                        <li><a id="LinkDecrease" href="#" style="font-size:11px;">A<span id="decreaseSpan"></span></a></li>
+                        <li><a href="@Url.Action("SetCulture", "Home", new { culture = "ar-AE", CurrentPage = @ViewContext.RouteData.Values["action"], CurrentControl1 = @ViewContext.RouteData.Values["controller"] })"> AR</a></li>
+
+                        <li class="dropdown notifications-menu">
+
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-users"></i>
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                <li class="header text-bold text-center">@Html.ResourceText("UsersManagement")</li>
+                                <li>
+                                    <ul class="menu">
+                                        <li>
+                                            <a href="@Url.Action("UsersList", "GsAccount")">
+                                                <i class="fa fa-users text-aqua"></i> @Html.ResourceText("UsersList")
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("RolesList", "GsAccount")">
+                                                <i class="fa fa-users text-aqua"></i>@Html.ResourceText("RolesList")
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("CreateRole", "GsAccount")">
+                                                <i class="fa fa-warning text-yellow"></i>@Html.ResourceText("AddNewRole")
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("ManageUserRoles", "GsAccount")">
+                                                <i class="fa fa-users text-red"></i>@Html.ResourceText("ManageusersRoles")
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+
+
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="~/Assets/UploadedFiles/NoImage.jpg" class="user-image" alt="User Image" />
+                                <span class="hidden-xs">Mahmoud Hamdi Swilam</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img src="~/Assets/UploadedFiles/NoImage.jpg" class="img-circle" alt="User Image" />
+                                    <p>
+                                        <small>Mahmoud Hamdi Swilam</small>
+                                    </p>
+                                </li>
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="@Url.Action("ProfileUser","GsAccount")" class="btn btn-default btn-flat">@Html.ResourceText("Profile")</a>
+                                    </div>
+                                    @using (Html.BeginForm("LogOff", "GsAccount", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @*<li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>*@
+
+                                    <li>
+                                        <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-default btn-flat">@Html.ResourceText("Logoff")</a>
+                                    </li>
+                                }
+                                </ul>
+
+                            </li>
+
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+
+        }
+
+<script>
+    function test() {
+        $('.navbar-static-top').css('margine', '60');
+    }
+
+     $(function () {
+             var Culture = '@CultureHelper.GetCurrentNeutralCulture().ToString()';
+
+         @*MenuID = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(LoginContext.Current.MainMenuList.Select(x => x.ID)));
+         if (Culture == 'en') {
+             MenuName =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(LoginContext.Current.MainMenuList.Where(x => x.TypeID == 2).Select(x => x.EnglishName)))
+         }
+         else {
+              MenuName =@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(LoginContext.Current.MainMenuList.Where(x => x.TypeID == 2).Select(x => x.ArabicName)))
+         }*@
+                //$(".MenuName").autocomplete({
+                //    source: MenuName
+                //});
+
+
+
+
+            $('.searchMenu').on('click', function () {
+               // var menuN = $('.MenuName').val();
+                var indexarray = $.inArray($('.MenuName').val(), MenuName);
+                var id = MenuID[indexarray];
+                var aitem = 'a[iditem=' + id + ']';
+                $(aitem)[0].click();
+            });
+
+        });
+</script>

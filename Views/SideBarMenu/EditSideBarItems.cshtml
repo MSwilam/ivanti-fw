@@ -1,0 +1,110 @@
+@model Ivanti_FW.Models.SideBarItemsModelReq
+
+
+
+<style>
+    .tooltip-master {
+        display: none;
+    }
+</style>
+
+
+@{
+	 var  SideBarMenuCollection = EA.GetSideBarMenu(); 
+	}
+	
+
+<form asp-action="EditSideBarItems" asp-controller="SideBarMenu" method="POST" data-ajax="true" data-ajax-complete="fnCompleted" class="CreatePage" id="SideBarItemsFrmID">
+
+    @Html.AntiForgeryToken()
+
+
+                                <div class="box-body">
+				    <div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("SideBarMenu")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.SideBarItems.SideBarMenuId, "", new { @class = "text-danger" })
+			@Html.DropDownListFor((m) => m.SideBarItems.SideBarMenuId, new SelectList(SideBarMenuCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("SideBarMenu"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("ARABICNAME")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.SideBarItems.ArabicName, "", new { @class = "text-danger" })
+			<div class="d-flex">
+		@Html.EditorFor(model => model.SideBarItems.ArabicName, new { htmlAttributes = new { @class = "form-control ArabicCheckList", @placeholder = @Html.GSText("ARABICNAME"), @maxlength = 200 } })
+		<button type="button" class="btn btn-icon-toggle btn-warning tooltip-master" data-tooltip-content="#tooltip_ArabicCheck">
+		<i class="mdi mdi-info-outline"></i>
+		</button>
+	</div>
+	</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("ENGLISHNAME")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.SideBarItems.EnglishName, "", new { @class = "text-danger" })
+			<div class="d-flex">
+		@Html.EditorFor(model => model.SideBarItems.EnglishName, new { htmlAttributes = new { @class = "form-control EnglishCheckList", @placeholder = @Html.GSText("ENGLISHNAME"), @maxlength = 200 } })
+		<button type="button" class="btn btn-icon-toggle btn-warning tooltip-master" data-tooltip-content="#tooltip_EnglishCheck">
+		<i class="mdi mdi-info-outline"></i>
+		</button>
+	</div>
+	</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("PATH")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.SideBarItems.Path, "", new { @class = "text-danger" })
+			@Html.EditorFor(model => model.SideBarItems.Path, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("PATH"), @maxlength = 200 } })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("CREATEPATH")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.SideBarItems.CreatePath, "", new { @class = "text-danger" })
+			@Html.EditorFor(model => model.SideBarItems.CreatePath, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("CREATEPATH"), @maxlength = 200 } })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("ICON")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.SideBarItems.Icon, "", new { @class = "text-danger" })
+			@Html.EditorFor(model => model.SideBarItems.Icon, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("ICON"), @maxlength = 200 } })
+		</div>
+	</div>
+	<div class="form-group">
+	<label class="col-sm-4 control-label">@Html.GSText("IMAGEPATH")</label>
+		<div class="col-sm-8">
+			@Html.ValidationMessageFor(model => model.SideBarItems.ImagePath, "", new { @class = "text-danger" })
+			@Html.EditorFor(model => model.SideBarItems.ImagePath, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("IMAGEPATH"), @maxlength = 200 } })
+		</div>
+	</div>
+	
+				    
+                                </div>
+
+                       
+
+		 @Html.HiddenFor(m => m.SideBarItems.Id)
+            <div class="modal-footer border-0">
+        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">@Html.GSText("Close")</button>
+        <button type="submit" class="btn btn-primary">@Html.GSText("Save")</button>
+    </div>
+</form>
+
+
+
+    <script type="text/javascript">
+	$(document).ready(function () {
+	
+	
+  	});
+
+       function fnCompleted(msg) {
+         NotifyMsg(msg.responseJSON.statusTitle, msg.responseJSON.statusMessage, msg.responseJSON.status);
+        setTimeout(function () {
+            window.location.href = "/SideBarMenu/SideBarItemsDashboard";
+        }, 1000);
+    };
+
+</script>

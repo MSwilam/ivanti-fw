@@ -1,0 +1,318 @@
+@model Ivanti_FW.Models.IS01ModelReq
+
+@{
+    ViewBag.Title = EA.GetMessage("CREATE");
+    //Layout = "~/Views/Shared/_LayoutWork.cshtml";
+}
+
+
+<style>
+    .tooltip-master {
+        display: none;
+    }
+</style>
+
+@section toolbar{
+
+    <div class="page-header mb-0">
+        <div class="col-md-12">
+            <div class="row align-items-end">
+                <div class="col-xl-9">
+                    <div class="d-flex page-header-element align-items-center">
+                        <img src="//cdn.saudisystems.net/V4/assets/images/svgs/service_line/Indv/sims.svg" width="64" height="64" class="me-2">
+                        <div>
+                            <a href="/IS/IS01dashboard" class="back_btn pb-1 align-items-end mt-0 fs-12">
+                                <i class="mutasil-icon mutasil-icon-40 fa-lg"></i>
+                                @Html.GSText("BACK_TO_IS01")
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@{
+    var IncidentTypeCollection = EA.GetIncidentType();
+    var YesNoAnswerCollection = EA.GetYesNoAnswer();
+    var ServiceProviderClassificationCollection = EA.GetServiceProviderClassification();
+    var ImpactedServiceCollection = EA.GetImpactedService();
+    var SophisticationAttackCollection = EA.GetSophisticationAttack();
+    var ImpactTypeSeverityCollection = EA.GetImpactTypeSeverity();
+    var ImpactAssetCollection = EA.GetImpactAsset();
+    var PublishedExternallyCollection = EA.GetPublishedExternally();
+    var RootCauseCollection = EA.GetRootCause();
+    var AttackStatusCollection = EA.GetAttackStatus();
+    var ImpactIncidentCollection = EA.GetImpactIncident();
+    var ImpactTypeCollection = EA.GetImpactType();
+}
+
+
+<form asp-action="CreateIS01" asp-controller="IS" method="POST" data-ajax="true" data-ajax-complete="fnCompleted" class="CreatePage" id="IS01FrmID">
+
+    @Html.AntiForgeryToken()
+
+
+    <!-- form start -->
+    <section class="form-horizontal center" style="margin-bottom:50px;">
+        <div class="box-body">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("UserID")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.UserID, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.IS01.UserID, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("UserID") } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("UserName")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.UserName, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.IS01.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("UserName"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("EntityName")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.EntityName, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.IS01.EntityName, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("EntityName"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("Email")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.Email, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.IS01.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("Email"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("IncidentInformation")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.IncidentInformation, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(model => model.IS01.IncidentInformation,  new { @class = "form-control mb-4", @placeholder = @Html.GSText("IncidentInformation"), @maxlength = 4000 ,@rows = 4 } )
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("IncidentType")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.IncidentTypeId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.IS01.IncidentTypeId, new SelectList(IncidentTypeCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("IncidentType"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("IncidentDate")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.IncidentDate, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.IS01.IncidentDate, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("IncidentDate") } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("IncidentTime")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.IncidentTime, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.IS01.IncidentTime, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("IncidentTime") } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("YesNoAnswer")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.IncidentHandled, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.IS01.IncidentHandled, new SelectList(YesNoAnswerCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("YesNoAnswer"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("HandlingTime")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.HandlingTime, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.IS01.HandlingTime, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("HandlingTime") } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("CybersecurityIncidentCalculator")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.CybersecurityIncidentCalculator, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.IS01.CybersecurityIncidentCalculator, new SelectList(YesNoAnswerCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("YesNoAnswer"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("ServiceProviderClassification")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.ServiceProviderClassificationId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.IS01.ServiceProviderClassificationId, new SelectList(ServiceProviderClassificationCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("ServiceProviderClassification"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("ImpactedService")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.ImpactedServiceId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.IS01.ImpactedServiceId, new SelectList(ImpactedServiceCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("ImpactedService"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("SophisticationAttack")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.SophisticationAttackId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.IS01.SophisticationAttackId, new SelectList(SophisticationAttackCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("SophisticationAttack"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("ImpactTypeSeverity")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.ImpactTypeCompromiseId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.IS01.ImpactTypeCompromiseId, new SelectList(ImpactTypeSeverityCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("ImpactTypeSeverity"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("ImpactTypeDataLeakageId")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.ImpactTypeDataLeakageId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.IS01.ImpactTypeDataLeakageId, new SelectList(ImpactTypeSeverityCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("ImpactTypeSeverity"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("ImpactTypeReputationId")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.ImpactTypeReputationId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.IS01.ImpactTypeReputationId, new SelectList(ImpactTypeSeverityCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("ImpactTypeSeverity"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("ImpactTypeDisruptionId")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.ImpactTypeDisruptionId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.IS01.ImpactTypeDisruptionId, new SelectList(ImpactTypeSeverityCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("ImpactTypeSeverity"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("ImpactTypeDestructionId")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.ImpactTypeDestructionId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.IS01.ImpactTypeDestructionId, new SelectList(ImpactTypeSeverityCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("ImpactTypeSeverity"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("ImpactAsset")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.ImpactAssetId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.IS01.ImpactAssetId, new SelectList(ImpactAssetCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("ImpactAsset"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("PublishedExternally")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.PublishedExternallyId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.IS01.PublishedExternallyId, new SelectList(PublishedExternallyCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("PublishedExternally"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("RootCause")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.RootCauseId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.IS01.RootCauseId, new SelectList(RootCauseCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("RootCause"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("AttackStatus")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.AttackStatusId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.IS01.AttackStatusId, new SelectList(AttackStatusCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("AttackStatus"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("TotalScore")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.TotalScore, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.IS01.TotalScore, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("TotalScore") } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("ImpactIncident")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.ImpactIncidentId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.IS01.ImpactIncidentId, new SelectList(ImpactIncidentCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("ImpactIncident"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("ImpactType")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.ImpactTypeId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.IS01.ImpactTypeId, new SelectList(ImpactTypeCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("ImpactType"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("EntitesInformed")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.EntitesInformed, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.IS01.EntitesInformed, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("EntitesInformed"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("IsDamagedSystem")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.IsDamagedSystem, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.IS01.IsDamagedSystem, new SelectList(YesNoAnswerCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("YesNoAnswer"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("DamagedSystem")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.DamagedSystem, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.IS01.DamagedSystem, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("DamagedSystem"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("ActionAlreadyTaken")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.ActionAlreadyTaken, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.IS01.ActionAlreadyTaken, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("ActionAlreadyTaken"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("Iocs")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.IS01.Iocs, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(model => model.IS01.Iocs,  new { @class = "form-control mb-4", @placeholder = @Html.GSText("Iocs"), @maxlength = 4000 ,@rows = 4 } )
+                </div>
+            </div>
+
+            <div class="form-group File-upload-inline">
+                <div class="text-divider col-sm-12"><span>@Html.GSText("IS01_FILES")</span></div>
+                <div class=" file-attachment-section">
+                    <div class="col-sm-12 div-upload-file">
+                        @{
+                            Html.RenderPartial("UploadFileInline", new GSFunction.Models.UploadFileModel { FileTypes = ".doc,.pdf,.docx,.xls,.xlsx,.jpeg,.jpg,.png,.gif,.tif" });
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="float-end">
+            <button class="btn btn-primary btn-submit">@Html.GSText("ADD_IS01")</button>
+            <a href="/IS/IS01dashboard" class="btn btn-outline-primary">@Html.GSText("Cancel")</a>
+
+        </div>
+    </section>
+
+    
+
+
+
+</form>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.div-upload-file').initUpload({});
+
+    });
+
+    function fnCompleted(msg) {
+        NotifyMsg(msg.responseJSON.statusTitle, msg.responseJSON.statusMessage, msg.responseJSON.status);
+        setTimeout(function () {
+            window.location.href = "/IS/IS01Dashboard";
+        }, 1000);
+    };
+</script>

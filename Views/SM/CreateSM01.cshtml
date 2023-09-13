@@ -1,0 +1,146 @@
+@model Ivanti_FW.Models.SM01ModelReq
+
+@{
+    ViewBag.Title = EA.GetMessage("CREATE");
+    //Layout = "~/Views/Shared/_LayoutWork.cshtml";
+}
+
+
+<style>
+    .tooltip-master {
+        display: none;
+    }
+</style>
+
+@section toolbar{
+
+    <div class="page-header mb-0">
+        <div class="col-md-12">
+            <div class="row align-items-end">
+                <div class="col-xl-9">
+                    <div class="d-flex page-header-element align-items-center">
+                        <img src="//cdn.saudisystems.net/V4/assets/images/svgs/service_line/Indv/sims.svg" width="64" height="64" class="me-2">
+                        <div>
+                            <a href="/SM/SM01dashboard" class="back_btn pb-1 align-items-end mt-0 fs-12">
+                                <i class="mutasil-icon mutasil-icon-40 fa-lg"></i>
+                                @Html.GSText("BACK_TO_SM01")
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@{
+    var ConfidenceCollection = EA.GetConfidence();
+}
+
+
+<form asp-action="CreateSM01" asp-controller="SM" method="POST" data-ajax="true" data-ajax-complete="fnCompleted" class="CreatePage" id="SM01FrmID">
+
+    @Html.AntiForgeryToken()
+
+
+    <!-- form start -->
+    <section class="form-horizontal center" style="margin-bottom:50px;">
+        <div class="box-body">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("UserID")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.SM01.UserID, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.SM01.UserID, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("UserID") } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("UserName")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.SM01.UserName, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.SM01.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("UserName"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("EntityName")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.SM01.EntityName, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.SM01.EntityName, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("EntityName"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("Email")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.SM01.Email, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.SM01.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("Email"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("Confidence")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.SM01.ConfidenceId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor((m) => m.SM01.ConfidenceId, new SelectList(ConfidenceCollection, "Key", "Value"), string.Format("{0} - {1}", EA.GetMessage("Confidence"), EA.GetMessage("All")), new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("Source")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.SM01.Source, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.SM01.Source, new { htmlAttributes = new { @class = "form-control", @placeholder = @Html.GSText("Source"), @maxlength = 200 } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("IncidentNotification")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.SM01.IncidentNotification, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(model => model.SM01.IncidentNotification,  new { @class = "form-control mb-4", @placeholder = @Html.GSText("IncidentNotification"), @maxlength = 4000 ,@rows = 4 } )
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">@Html.GSText("Notes")</label>
+                <div class="col-sm-8">
+                    @Html.ValidationMessageFor(model => model.SM01.Notes, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(model => model.SM01.Notes,  new { @class = "form-control mb-4", @placeholder = @Html.GSText("Notes"), @maxlength = 4000 ,@rows = 4 } )
+                </div>
+            </div>
+
+            <div class="form-group File-upload-inline">
+                <div class="text-divider col-sm-12"><span>@Html.GSText("SM01_FILES")</span></div>
+                <div class=" file-attachment-section">
+                    <div class="col-sm-12 div-upload-file">
+                        @{
+                            Html.RenderPartial("UploadFileInline", new GSFunction.Models.UploadFileModel { FileTypes = ".doc,.pdf,.docx,.xls,.xlsx,.jpeg,.jpg,.png,.gif,.tif" });
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="float-end">
+            <button class="btn btn-primary btn-submit">@Html.GSText("ADD_SM01")</button>
+            <a href="/SM/SM01dashboard" class="btn btn-outline-primary">@Html.GSText("Cancel")</a>
+
+        </div>
+    </section>
+
+  
+
+
+
+</form>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.div-upload-file').initUpload({});
+
+    });
+
+    function fnCompleted(msg) {
+        NotifyMsg(msg.responseJSON.statusTitle, msg.responseJSON.statusMessage, msg.responseJSON.status);
+        setTimeout(function () {
+            window.location.href = "/SM/SM01Dashboard";
+        }, 1000);
+    };
+</script>

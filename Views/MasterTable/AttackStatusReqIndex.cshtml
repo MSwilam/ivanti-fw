@@ -1,0 +1,136 @@
+@model Ivanti_FW.Models.AttackStatusModel
+
+@{
+    string DetailsText = @EA.GetMessage("Details");
+    string EditText = @EA.GetMessage("Edit");
+    string DeActivatedText = @EA.GetMessage("DeActivated");
+    string ActiveText = @EA.GetMessage("Active");
+}
+
+
+
+
+<div class="row">
+
+                @{
+                    Html.RenderPartial("PagingModelPartial");
+                }
+                @if (@Model.AttackStatusList != null)
+                {
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead class="thead-dark ReqIndex">
+                            <tr>
+                                <th width="5%">
+                                    <input type="checkbox" id="CheckAll" />
+                                </th>
+
+
+                               <th class="sort"  SortField="ARABICNAME" SortDirection="Ascending">@Html.GSText("ARABICNAME")</th>
+	<th class="sort"  SortField="ENGLISHNAME" SortDirection="Ascending">@Html.GSText("ENGLISHNAME")</th>
+	
+
+
+                                <th class="text-center">
+                                    @EditText
+                                </th>
+                                <th class="text-center">
+                                    @DeActivatedText
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+     			@foreach (var item in Model.AttackStatusList)
+                            {
+                            <tr reqid="@item.Id" class="RawClass" style="cursor: pointer">
+                                    <td id="select">
+                                        <input type="checkbox" name="employeeIdsToDelete" id="AssetsTypeIdsToDelete" value=@item.Id />
+                                    </td>
+
+
+                                    <td class="DetailsDialog th1 "  >@item.ArabicName</td>
+	<td class="DetailsDialog th2 "  >@Html.GSCamalCase(@item.EnglishName)</td>
+	
+
+                                    <td class="text-center">
+                                        <a class="btn btn-primary btn-sm EditClass"  data-to data-toggle="tooltip" data-placement="top" data-original-title="@EditText" title="@EditText"><i class="glyphicon glyphicon-edit"></i></a>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a class="btn btn-danger btn-sm Deleteclss" ID="@item.Id" data-toggle="tooltip" data-placement="top" data-original-title="@DeActivatedText" title="@DeActivatedText"><i class="glyphicon glyphicon-trash"></i></a>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                }
+                else
+                {
+                    @Html.GSNoRecord()
+                }
+</div><!-- /.row -->
+
+
+
+
+
+
+<script>
+    $(function () {
+	//TableSerach('@Url.Action("GetAttackStatusSearchTxt","AttackStatus")", "AttackStatusNameAC"); 
+	
+    });
+
+     $('.EditClass').on('click', function () {
+
+        var reqid = $(this).closest('tr').attr("reqid");
+        AttackStatusEdit(reqid);
+    });
+
+     $('.DetailsDialog').on('click', function () {
+
+        var reqid = $(this).closest('tr').attr("reqid");
+        AttackStatusDetails(reqid);
+    });
+
+    function AttackStatusEdit(reqid) {
+        $.ajax({
+            type: 'GET',
+            url: "@Url.Action("EditAttackStatus", "MasterTable")",
+            data: {
+                Id: reqid
+            },
+
+            success: function (r) {
+                showModal("@Html.GSText("UPDATE AttackStatus")",null,r,'lg');
+
+            }
+        });
+    }
+
+ function AttackStatusDetails(reqid) {
+        $.ajax({
+            type: 'GET',
+            url: "@Url.Action("DetailsAttackStatus", "MasterTable")",
+            data: {
+                Id: reqid
+            },
+
+            success: function (r) {
+                showModal("@Html.GSText("Details")",null,r,'lg');
+            }
+        });
+    }
+
+    $('.Deleteclss').on('click', function () {
+
+        ConfirmMessageDelete(this, "Delete Confirm", "Are You Sure ?", "Delete", '@Url.Action("DeleteAttackStatus", "MasterTable")','Id')
+    });
+
+
+
+</script>
+

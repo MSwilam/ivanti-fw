@@ -1,0 +1,133 @@
+﻿@model Ivanti_FW.Models.ServiceReqModel
+@{
+   string DetailsText = @EA.GetMessage("Details");
+    string EditText = @EA.GetMessage("Action");
+}
+
+
+
+
+<div class="row">
+
+                @{
+                    Html.RenderPartial("PagingModelPartial");
+                }
+                @if (@Model.Response.value != null)
+                {
+                    <table id="example1" class="table table-bordered table-striped" style="margin-bottom:50px;">
+            <thead class="thead-dark ReqIndex">
+                <tr>
+                 
+
+
+                    <th>@Html.GSText("SR#")</th>
+                    <th >@Html.GSText("servicename")</th>
+                    <th style="display:none;">@Html.GSText("ServiceType")</th>
+                    <th>@Html.GSText("ServiceStatus")</th>
+                    <th>@Html.GSText("CreatedBy")</th>
+                    <th>@Html.GSText("CreatedDate")</th>
+                    <th class="text-center">
+                        @EditText
+                    </th>
+              
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Response.value)
+                {
+                    <tr reqid="@item.RecId" class="RawClass" style="cursor: pointer">
+                       
+
+
+                        <td class="DetailsDialog">@item.ServiceReqNumber</td>
+                        <td class="DetailsDialog">@item.Service</td>
+                        <td style="display:none;" class="DetailsDialog">@item.Subject</td>
+                        <td class="DetailsDialog">@item.Status</td>
+                        <td class="DetailsDialog">@item.CreatedBy</td>
+                        <td class="DetailsDialog">@item.CreatedDateTime.ToShortDateString()</td>
+                        <td class="text-center DetailsDialog">
+                            <a class="btn btn-primary btn-sm "><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        </td>
+
+
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+                }
+                else
+                {
+                    @Html.GSNoRecord()
+                }
+</div><!-- /.row -->
+
+
+
+
+
+
+<script>
+    $(function () {
+        var dir = $('html').attr('dir');
+
+        if (dir == 'rtl') {
+            $('#example1')
+                .DataTable({
+                    "language":
+                    {
+                        "sProcessing": "جارٍ التحميل...",
+                        "sLengthMenu": "أظهر _MENU_ مدخلات",
+                        "sZeroRecords": "لم يعثر على أية سجلات",
+                        "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                        "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                        "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                        "sInfoPostFix": "",
+                        "sSearch": "ابحث:",
+                        "sUrl": "",
+                        "oPaginate": {
+                            "sFirst": "الأول",
+                            "sPrevious": "السابق",
+                            "sNext": "التالي",
+                            "sLast": "الأخير"
+                        }
+                    }
+                });
+        }
+        else {
+            $('#example1').DataTable();
+        }
+    });
+
+     
+
+     $('.DetailsDialog').on('click', function () {
+
+        var reqid = $(this).closest('tr').attr("reqid");
+        TH02Details(reqid);
+    });
+
+   
+
+ function TH02Details(reqid) {
+        $.ajax({
+            type: 'GET',
+            url: "@Url.Action("DetailsTH02", "TH")",
+            data: {
+                ID: reqid
+            },
+
+            success: function (r) {
+                showModal('@Html.GSText("Details")',null,r,'lg');
+            }
+        });
+    }
+
+  
+
+
+
+</script>
+
