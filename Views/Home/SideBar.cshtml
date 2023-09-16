@@ -19,7 +19,7 @@
 }*@
 
 <div class="row row-flex grid">
-    @foreach (var item in Model.SideBarMenuList)
+    @foreach (var item in Model.SideBarMenuList.Where(x=>x.Active == 1))
     {
         <div class="col-xl-4 col-lg-4 col-md-6 mb-2 grid-item filter-complaints service-box" id="service_2" data-service-category-id="3" data-service-name="تصعيد شكاوى الاتصالات" data-service-description="تتيح الخدمة للمستفيد تصعيد الشكوى لدى الهيئة في حال إغلاق الشكوى من قبل مقدم الخدمة دون معالجة أو مرور 5 أيام دون حل" data-service-is-favorite="False">
             <div class="service_item">

@@ -5237,7 +5237,7 @@ jQuery.event = {
 						handleObj.handler ).apply( matched.elem, args );
 
 					if ( ret !== undefined ) {
-						if ( ( event.result = ret ) === false ) {
+						if ( ( event = ret ) === false ) {
 							event.preventDefault();
 							event.stopPropagation();
 						}
@@ -5251,7 +5251,7 @@ jQuery.event = {
 			special.postDispatch.call( this, event );
 		}
 
-		return event.result;
+		return event;
 	},
 
 	handlers: function( event, handlers ) {
@@ -5405,8 +5405,8 @@ jQuery.event = {
 
 				// Support: Firefox 20+
 				// Firefox doesn't alert if the returnValue field is not set.
-				if ( event.result !== undefined && event.originalEvent ) {
-					event.originalEvent.returnValue = event.result;
+				if ( event !== undefined && event.originalEvent ) {
+					event.originalEvent.returnValue = event;
 				}
 			}
 		}
@@ -8421,7 +8421,7 @@ jQuery.extend( jQuery.event, {
 			null;
 
 		// Clean up the event in case it is being reused
-		event.result = undefined;
+		event = undefined;
 		if ( !event.target ) {
 			event.target = elem;
 		}
@@ -8474,8 +8474,8 @@ jQuery.extend( jQuery.event, {
 			// Native handler
 			handle = ontype && cur[ ontype ];
 			if ( handle && handle.apply && acceptData( cur ) ) {
-				event.result = handle.apply( cur, data );
-				if ( event.result === false ) {
+				event = handle.apply( cur, data );
+				if ( event === false ) {
 					event.preventDefault();
 				}
 			}
@@ -8522,7 +8522,7 @@ jQuery.extend( jQuery.event, {
 			}
 		}
 
-		return event.result;
+		return event;
 	},
 
 	// Piggyback on a donor event to simulate a different one

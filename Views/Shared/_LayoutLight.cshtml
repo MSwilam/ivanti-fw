@@ -1,16 +1,15 @@
 ﻿@using Ivanti_FW.Helper;
-@
 @{
     var currentLang = LocalizationsManager.GetCurrentLanguage();
     var dirLang = currentLang == "ar" ? "rtl" : "ltr";
-    DgUiDto ui =  DigitalGateWebRequestUrlHelper.GetUIAsync<DgUiDto>().Result;
+    DgUiDto ui =  DigitalGateWebRequestUrlHelper.GetUIAsync<DgUiDto>();
 }
 <!doctype html>
 <html lang="@currentLang" dir="@dirLang">
 <head>
 
     @Html.Raw(ui.Head)
-    <link href="https://cdn.saudisystems.net/V4/assets/plugins/growl-notification/light-theme.min.css" rel="stylesheet">
+    <link href="https://portalscdnstg.citc.gov.sa/V4/assets/plugins/growl-notification/light-theme.min.css" rel="stylesheet">
     <style>
         .search-sec {
             padding-bottom: 20px;
@@ -42,7 +41,7 @@
 <body class="app horizontal @dirLang">
     <!-- GLOBAL-LOADER -->
     <div id="global-loader">
-        <img src="//cdn.saudisystems.net/V4/assets/images/loader.svg" class="loader-img" alt="Loader">
+        <img src="//portalscdnstg.citc.gov.sa/V4/assets/images/loader.svg" class="loader-img" alt="Loader">
     </div>
     <!-- /GLOBAL-LOADER -->
     <!-- PAGE -->
@@ -96,82 +95,82 @@
 
 
 
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/bootstrap/js/popper.min.js"></script>
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- SIDEBAR JS -->
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/sidebar/sidebar.min.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/sidebar/sidebar.min.js"></script>
 
     <!-- Sticky js -->
-    <script src="//cdn.saudisystems.net/V4/assets/js/sticky.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/js/sticky.js"></script>
     <!-- Greedy Navigation JS -->
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/greedy-nav/greedy-nav.min.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/greedy-nav/greedy-nav.min.js"></script>
 
     <!--Video Popup CSS-->
-    <link href="//cdn.saudisystems.net/V4/assets/plugins/videopopup/video.popup.css" rel="stylesheet" />
+    <link href="//portalscdnstg.citc.gov.sa/V4/assets/plugins/videopopup/video.popup.css" rel="stylesheet" />
 
     <!-- INTERNAL SELECT2 JS -->
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/select2/select2.full.min.js"></script>
-    <script src="//cdn.saudisystems.net/V4/assets/js/select2.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/select2/select2.full.min.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/js/select2.js"></script>
 
 
     <!-- SWEET-ALERT JS -->
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/sweetalert2/dist/sweetalert2.min.js"></script>
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/sweetalert2/dist/sweetalert2.lang.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/sweetalert2/dist/sweetalert2.lang.js"></script>
 
     <!-- MULTI SELECT JS-->
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/multipleselect/multiple-select.min.js"></script>
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/multipleselect/multiple-select-ar-SA.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/multipleselect/multiple-select.min.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/multipleselect/multiple-select-ar-SA.js"></script>
 
     <!-- isotope Filter JS -->
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/isotope/isotope.pkgd.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/isotope/isotope.pkgd.js"></script>
 
     <!-- INTERNAl Jquery.steps js -->
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/jquery-steps/jquery.steps.min.js"></script>
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/parsleyjs/parsley.min.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/jquery-steps/jquery.steps.min.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/parsleyjs/parsley.min.js"></script>
 
     <!-- Charts Js-->
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/knob/knob.min.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/knob/knob.min.js"></script>
 
 
     <!-- INTERNAL Notifications js -->
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/growl-notification/growl-notification.min.js"></script>
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/validation/smoke-v3.1.1/js/smoke.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/growl-notification/growl-notification.min.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/validation/smoke-v3.1.1/js/smoke.js"></script>
 
     <!-- DateRangePicker -->
-    <script src="//cdn.saudisystems.net/V4//assets/plugins/datepicker/daterangepicker.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4//assets/plugins/datepicker/daterangepicker.js"></script>
 
     <!-- INTERNAL Video Popup-->
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/videopopup/video.popup.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/videopopup/video.popup.js"></script>
 
     <!-- Avatar fileupload JS -->
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/fileuploads/js/fileupload.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/fileuploads/js/fileupload.js"></script>
 
 
     <!-- CUSTOM JS -->
-    <script src="//cdn.saudisystems.net/V4/assets/js/custom.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/js/custom.js"></script>
 
     <!-- INTERNAL File-Uploads Js-->
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/fancyuploder/jquery.ui.widget.js"></script>
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/fancyuploder/jquery.fileupload.js"></script>
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/fancyuploder/jquery.iframe-transport.js"></script>
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/fancyuploder/jquery.fancy-fileupload.js"></script>
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/fancyuploder/lang/ar.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/fancyuploder/jquery.ui.widget.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/fancyuploder/jquery.fileupload.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/fancyuploder/jquery.iframe-transport.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/fancyuploder/jquery.fancy-fileupload.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/fancyuploder/lang/ar.js"></script>
 
 
     <!-- Particles Animation JS -->
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/particles/particles.min.js"></script>
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/particles/particles.init.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/particles/particles.min.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/particles/particles.init.js"></script>
 
     <!-- SimpleBar JS-->
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/simplebar/simplebar.min.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/simplebar/simplebar.min.js"></script>
 
     <!-- Datepicker -->
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/datepicker/bootstrap-hijri-datetimepicker.min.js">
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/datepicker/bootstrap-hijri-datetimepicker.min.js">
     </script>
 
     <!-- SWEET-ALERT JS -->
-    <script src="//cdn.saudisystems.net/V4/assets/plugins/sweet-alert/sweetalert.min.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/plugins/sweet-alert/sweetalert.min.js"></script>
     <script src="~/Assets/AdminLTE/Scripts/jquery.validate.min.js"></script>
     <script src="~/Assets/AdminLTE/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Assets/AdminLTE/Scripts/jquery.unobtrusive-ajax.min.js"></script>
@@ -184,7 +183,7 @@
     <script src="~/Assets/Adminlte/Scripts/EMM/EMMPagging.js"></script>
 
     <!-- dg JS -->
-    <script src="//cdn.saudisystems.net/V4/assets/js/dg.js"></script>
+    <script src="//portalscdnstg.citc.gov.sa/V4/assets/js/dg.js"></script>
     <script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     @Html.Raw(ui.Scripts)
 
